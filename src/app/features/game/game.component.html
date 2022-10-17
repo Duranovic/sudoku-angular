@@ -1,0 +1,56 @@
+<div class="sudoku-grid">
+    <div *ngFor="let row of array; let i = index" class="flex" [ngClass]="{'active-row': i.toString() == activeElementRow}">
+        <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()" [ngClass]="{'active-column': j.toString() == activeElementColumn}">
+            <!-- <button>{{i + "," + j}}</button> -->
+
+            <button (click)="onClick($event); $event.stopPropagation()" [ngClass]="{'active': i.toString() == activeElementRow && j.toString() == activeElementColumn}">
+                <span class="number-value">{{i + j}}</span>
+                <!-- <span *ngIf="(i + j) % 2 == 0" class="number-value">{{i.toString() + "," + j.toString()}}</span> -->
+                <!-- <span class="number-value">{{i.toString() + "," + j.toString()}}</span> -->
+                <span class="pattern" [ngClass]="{'show': i.toString() == activeElementRow || j.toString() == activeElementColumn}"></span>
+            </button>
+        </div>
+    </div>    
+</div>
+
+<div class="sudoku-controls-container">
+    <span class="time">
+        <img src="/assets/images/icon-stopwatch.svg" alt="Icon stopwatch">        
+        <span>19 min 32 sec</span>
+    </span>
+    <ul class="numbers">
+        <li *ngFor="let item of array">
+            <button (click)="setField(item + 1)">
+                <span class="main-number">{{item + 1}}</span>
+                <span class="number-of-fields-left">5</span>
+            </button>
+        </li>            
+    </ul>
+    <ul class="action-controls">
+        <li>
+            <button>
+                <img src="assets/images/restart-icon.svg" alt="Restart game">
+                <span>Restart</span>
+            </button>
+        </li>
+        <li>
+            <button>
+                <img src="assets/images/erase-icon.svg" alt="Erase field">
+                <span>Erase</span>
+            </button>
+        </li>
+        <li>
+            <button>
+                <img src="assets/images/notes-icon.svg" alt="Take a note">
+                <span>Notes</span>
+            </button>
+        </li>
+        <li>
+            <button>
+                <img src="assets/images/undo-icon.svg" alt="Undo">
+                <span>Undo</span>
+            </button>
+        </li>
+    </ul>
+    <sudoku-button text="New game"></sudoku-button>
+</div>

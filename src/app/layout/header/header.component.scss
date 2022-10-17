@@ -1,0 +1,27 @@
+@use '/src/styles/abstracts/colors';
+
+header{
+    display: flex;
+    justify-content: center;
+    
+    a{
+        text-decoration: none;
+    
+        h1{
+            font-size: 24px;
+            position: relative;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
+    
+            span{
+                font-size: 12px;
+                padding: 0 4px;
+                border-radius: 2px;
+                background-color: colors.$white;
+                color: colors.$black;
+                position: absolute;
+                right: 0;
+                bottom: -14px;
+            }
+        }
+    }
+}

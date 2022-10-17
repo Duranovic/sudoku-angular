@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 100px 0;
+}
+
+.content{
+    p {
+        margin-top: 32px;
+        max-width: 450px;
+        line-height: 22px;
+        margin-bottom: 32px;
+    }
+
+    position: relative;
+    top: -70px;
+
+    h1 {
+        font-size: 42px;
+        margin-bottom: 32px;
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
+    }
+}

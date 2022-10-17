@@ -1,0 +1,14 @@
+<div class="mobile-app-container">
+	<img src="assets/images/mobile-game.svg" alt="Mobile game" />
+	<form class="notify-me" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<h3>Coming soon on mobile devices!</h3>
+		<div class="velc-input" [ngClass]="{'invalid': !form.valid, 'loading': loading, 'success': success}">
+            <input maxlength="50" placeholder="Please enter your email" formControlName="email"/>
+            <button>        
+                <span>{{ buttonText }}</span>
+                <sudoku-spinner [size]="16" *ngIf="loading"></sudoku-spinner>
+            </button>
+        </div>        
+		<p>Notify me when app is launched! 🚀</p>
+	</form>
+</div>

@@ -1,0 +1,36 @@
+@use '/src/styles/abstracts/colors';
+
+img {
+  width: 450px;
+}
+
+p {
+  color: colors.$white;
+  margin-top: 32px;
+  max-width: 450px;
+  line-height: 22px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.get-it-on-mobile-store {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 140px;
+    &.google-play {
+      max-width: 160px;
+    }
+  }
+  
+  a {
+    transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+    &:hover {
+        position: relative;
+        opacity: 0.7;
+        transform: translateY(-1px);
+    }
+  }
+}
