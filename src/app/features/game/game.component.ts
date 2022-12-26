@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SudokuService } from 'src/app/core/services/sudoku.service';
 
 @Component({
   templateUrl: './game.component.html',
@@ -7,54 +7,52 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 })
 export class GameComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private sudokuService: SudokuService) { }
 
   public array = [...Array(9).keys()];
   public activeElementRow!: string;
-  public activeElementColumn!: string ;
-  public form!: FormGroup;
-  public sudoku_matrix!: FormArray;
+  public activeElementColumn!: string;
+  public sudoku_puzzle?: any;
 
-
-  // TODO: povezati form group/form array sa template-om i 
-  // prikazati stvarne brojeve u sudoku gridu
-
-
-  ngOnInit(): void { 
-    this.form = this.formBuilder.group({
-      details: new FormArray([])
-    });
-    this.sudoku_matrix = this.form.controls['details'] as FormArray;
-    this.generateForm();
+  public ngOnInit(): void {
+    this.sudoku_puzzle = this.sudokuService?.puzzle?.gameplay_puzzle;
+    console.table(this.sudoku_puzzle);
   }
 
-  public onClick($event: any) {    
-    this.activeElementRow = $event.target.parentElement?.id[0];
-    this.activeElementColumn = $event.target.parentElement?.id[1];
-  }
-
-  public generateForm() {
-    let sudoku_matrix__row;
-    for (let i = 0; i < 9; i++) {      
-      this.sudoku_matrix.setControl(i, new FormArray([]));
-      sudoku_matrix__row = (this.sudoku_matrix.at(i) as FormArray);
-      
-      for (let j = 0; j < 9; j++) {
-        sudoku_matrix__row.setControl(j, new FormControl({
-          row: i,
-          column: j,
-          computed: false,
-          value: undefined
-        }));
-      }
+  public onClick($event: any): void {
+    const isClickedOnSameElement = this.activeElementRow == $event.target.parentElement?.id[0] && this.activeElementColumn == $event.target.parentElement?.id[1];
+    
+    if (isClickedOnSameElement) {
+      this.activeElementRow = '';
+      this.activeElementColumn = '';
+    } else {
+      this.activeElementRow = $event.target.parentElement?.id[0];
+      this.activeElementColumn = $event.target.parentElement?.id[1];
     }
   }
 
-  public setField(number: number){
-    let fieldControl = ((this.sudoku_matrix.at(parseInt(this.activeElementRow)) as FormArray).at(parseInt(this.activeElementColumn))) as FormControl;
-    fieldControl.setValue({
-      ...fieldControl.value,
-      value: number
-    });
+  public setField(number: number): void {
+    // TODO: Change type of attributes to the number
+    let row = parseInt(this.activeElementRow);
+    let column = parseInt(this.activeElementColumn);
+
+    if(this.sudoku_puzzle[row][column].computed)
+      return;
+    
+    this.sudokuService.patchCell(row, column, number);
+  }
+
+  public eraseSelectedField(): void {
+    if(this.sudoku_puzzle[this.activeElementRow][this.activeElementColumn].computed)
+      return;
+
+    this.sudoku_puzzle[this.activeElementRow][this.activeElementColumn].value = null;
+  }
+
+  public restartGame(): void {
+    this.sudokuService.restartGame();
+    this.sudoku_puzzle = this.sudokuService.puzzle?.gameplay_puzzle;
+    this.activeElementColumn = '';
+    this.activeElementRow = '';
   }
 }
