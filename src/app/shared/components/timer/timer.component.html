@@ -1,5 +1,6 @@
 <span>
     <img src="/assets/images/icon-stopwatch.svg" alt="Icon stopwatch">    
+    <!-- <span>{{timer.timerToString}}</span> -->
     <ng-container *ngIf="timer$ | async as timer">
         {{ timer }}
     </ng-container>    

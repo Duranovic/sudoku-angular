@@ -5,16 +5,18 @@ export class Sudoku {
     puzzle: any[][];
     challenge_puzzle!: any[][];
     gameplay_puzzle!: any[][];
+    remianing_numbers!: number[];
 
     constructor() {
         this.puzzle = sudokuInitialPuzzle;
+        this.remianing_numbers = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.generateSudoku();
     }
 
     private generateSudoku() {
         // call the fillPuzzle function to generate the puzzle
         this.fillPuzzle(0, 0);
-        this.removeCells(50);
+        this.removeCells(20);
     }
 
     private fillPuzzle = (row: number, col: number): boolean => {
@@ -105,6 +107,7 @@ export class Sudoku {
 
             if (cell !== 0 && !removed.some(c => c[0] === row && c[1] === col)) {
                 removed.push([row, col, cell]);
+                this.remianing_numbers[cell.value]++;
                 this.challenge_puzzle[row][col] = {
                     value: undefined,
                     computed: false,
@@ -125,5 +128,11 @@ export class Sudoku {
 
     public restartSudoku(): void {
         this.gameplay_puzzle = cloneMatrix(this.challenge_puzzle);
+    }
+
+    public patchProps(state: Sudoku): void {
+        this.puzzle = cloneMatrix(state.puzzle);
+        this.challenge_puzzle = cloneMatrix(state.challenge_puzzle);
+        this.gameplay_puzzle = cloneMatrix(state.gameplay_puzzle);
     }
 }
