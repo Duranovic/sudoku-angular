@@ -95,8 +95,9 @@
         width: 100%;
         max-width: 350px;        
 
-        li {            
+        li {    
             button {
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 gap: 12px;
@@ -104,11 +105,37 @@
                 transition: opacity .22s;
 
                 &:hover {
+                    img, .label {
+                        opacity: 0.5;
+                    }
+                }
+
+                &:disabled {
                     opacity: 0.5;
+                    pointer-events: none;
+                    cursor: default;
                 }
 
                 img{
                     height: 20px;
+                }
+
+                .img, .label, .available-undo-moves {
+                    transition: opacity .22s;
+                }
+
+                .available-undo-moves {
+                    position: absolute;
+                    top: -15px;
+                    right: -15px;
+                    background-color: colors.$white;
+                    padding: 3px 6px 2px;
+                    border-radius: 50%;
+                    color: colors.$black;
+                    font-size: 12px;
+                    font-weight: bold;
+                    pointer-events: none;
+                    cursor: default;
                 }
             }
         }
@@ -176,6 +203,11 @@
             &:not(.computed):not(:empty) {
                 color: colors.$black;
                 background-color: #B6C2E8;
+            }
+
+            &.invalid:not(.computed):not(:empty) {
+                background-color: rgb(222, 69, 69);
+                color: white;
             }
         }
 

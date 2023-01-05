@@ -7,7 +7,7 @@ export const shuffle = (array: number[]): number[] => {
 }
 
 export const cloneMatrix = (matrix: number[][]): number[][] => {
-    return matrix.map(function (arr) {
+    return matrix?.map(function (arr) {
         return arr.slice();
     });
 }

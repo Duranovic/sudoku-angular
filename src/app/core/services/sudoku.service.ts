@@ -18,8 +18,9 @@ export class SudokuService {
     this.timer = new Timer();
   }
 
-  public patchCell(row: number, column: number, value: number) {
-    this.puzzle?.patchCell(row, column, value);
+  public patchCell(row: number, column: number, value: number | undefined) {
+    let valid: boolean = this.puzzle.puzzle[row][column].value === value;
+    this.puzzle?.patchCell(row, column, value, valid);
   }
 
   public restartGame(): void {
@@ -28,7 +29,8 @@ export class SudokuService {
 
   public setLocalStorage(patchOption: PatchLocalStorage): void {
     let storage_name = patchOption === PatchLocalStorage.Puzzle ? latest_sudoku_game : latest_sudoku_timer;
-    let objectToEncode = patchOption === PatchLocalStorage.Puzzle ? this.puzzle : this.timer.prepareForEncode();
+    let objectToEncode = patchOption === PatchLocalStorage.Puzzle ? this.puzzle.prepareForEncode() : this.timer.prepareForEncode();
+
     let encoded = Buffer.from(JSON.stringify(objectToEncode)).toString('base64');
     localStorage.setItem(storage_name, encoded);
   }

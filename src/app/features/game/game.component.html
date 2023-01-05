@@ -1,9 +1,9 @@
 <div class="sudoku-grid">
-    <div *ngFor="let row of array; let i = index" class="flex" [ngClass]="{'active-row': i.toString() == activeElementRow}">
-        <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()" [ngClass]="{'active-column': j.toString() == activeElementColumn}">
-            <button (click)="onClick($event); $event.stopPropagation()" [ngClass]="{'active': i.toString() == activeElementRow && j.toString() == activeElementColumn}">
-                <span class="number-value" [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed}">{{ sudoku_puzzle[i][j]?.value }}</span>
-                <span class="pattern" [ngClass]="{'show': i.toString() == activeElementRow || j.toString() == activeElementColumn}"></span>
+    <div *ngFor="let row of array; let i = index" class="flex" [ngClass]="{'active-row': i == activeElementRow}">
+        <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()" [ngClass]="{'active-column': j == activeElementColumn}">
+            <button (click)="onClick($event); $event.stopPropagation()" [ngClass]="{'active': i == activeElementRow && j == activeElementColumn}">
+                <span class="number-value" [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid}">{{ sudoku_puzzle[i][j]?.value }}</span>
+                <span class="pattern" [ngClass]="{'show': i == activeElementRow || j == activeElementColumn}"></span>
             </button>
         </div>
     </div>    
@@ -23,27 +23,30 @@
         <li>
             <button (click)="restartGame()">
                 <img src="assets/images/restart-icon.svg" alt="Restart game">
-                <span>Restart</span>
+                <span class="label">Restart</span>
             </button>
         </li>
         <li>
             <button (click)="eraseSelectedField()">
                 <img src="assets/images/erase-icon.svg" alt="Erase field">
-                <span>Erase</span>
+                <span class="label">Erase</span>
             </button>
         </li>
         <li>
             <button>
                 <img src="assets/images/notes-icon.svg" alt="Take a note">
-                <span>Notes</span>
+                <span class="label">Notes</span>
             </button>
         </li>
         <li>
-            <button>
+            <button (click)="undoPlay()" [disabled]="!isUndoEnabled()">
                 <img src="assets/images/undo-icon.svg" alt="Undo">
-                <span>Undo</span>
+                <span class="label">Undo</span>
+                <span class="available-undo-moves">{{sudokuService.puzzle.undo.available_moves}}</span>
             </button>
         </li>
     </ul>
     <sudoku-button text="New game"></sudoku-button>
+    <!-- Will be removed, it is onlt for DEV purposes -->
+    <button type="button" style="background-color: red; color: white; padding: 16px 12px; border-radius: 10px;" (click)="clearStorage()">Clear storage</button>
 </div>

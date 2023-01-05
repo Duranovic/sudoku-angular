@@ -6,9 +6,7 @@ export class Timer {
     private seconds: number = 0;
     public timer$!: BehaviorSubject<string>;
 
-    constructor() {
-        this.timer$ = new BehaviorSubject(this.getTimerStringFormat());
-    }
+    constructor() { }
 
     public addSecond() {
         if(this.seconds < 59) {
@@ -63,9 +61,10 @@ export class Timer {
     }
 
     public startTimer(): void {
-        if(this.seconds !== 0)
+        if(this.seconds !== 0 || this.timer$)
             return;
 
+        this.timer$ = new BehaviorSubject(this.getTimerStringFormat());
         setInterval(()=>{
             this.addSecond();
             this.timer$.next(this.getTimerStringFormat())
