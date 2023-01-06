@@ -1,0 +1,12 @@
+.cdk-overlay-container {
+    .cdk-overlay-dark-backdrop {
+        &.cdk-overlay-backdrop-showing {
+            backdrop-filter: blur(10px);
+            background: none;
+        }
+    }
+    .mat-dialog-container {
+        background: none;
+        box-shadow: none;
+    }
+}

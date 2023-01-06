@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AvailableNowComponent } from './landing/available-now/available-now.component';
 import { NotifyMeComponent } from './landing/notify-me/notify-me.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NewGameDialogComponent } from './new-game-dialog/new-game-dialog.component';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     LandingComponent,
     GameComponent,
     AvailableNowComponent,
-    NotifyMeComponent
+    NotifyMeComponent,
+    NewGameDialogComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    MatDialogModule,
     FeaturesRoutingModule
   ]
 })

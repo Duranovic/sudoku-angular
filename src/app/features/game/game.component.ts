@@ -5,6 +5,8 @@ import { latest_sudoku_game, latest_sudoku_timer } from 'src/app/core/constants/
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { BehaviorSubject } from 'rxjs';
 import { Timer } from 'src/app/core/models/timer';
+import { MatDialog } from '@angular/material/dialog';
+import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.component';
 
 @Component({
   templateUrl: './game.component.html',
@@ -12,7 +14,7 @@ import { Timer } from 'src/app/core/models/timer';
 })
 export class GameComponent implements OnInit {
 
-  constructor(public sudokuService: SudokuService) { }
+  constructor(public sudokuService: SudokuService, public dialog: MatDialog) { }
 
   public array = [...Array(9).keys()];
   public activeElementRow!: number;
@@ -92,5 +94,9 @@ export class GameComponent implements OnInit {
     let isUndoMovesLeft = this.sudokuService.puzzle.undo.available_moves > 0;
     let isUndoStackChanged = this.sudokuService.puzzle.undo.stack.length > 1;
     return isUndoMovesLeft && isUndoStackChanged;
+  }
+
+  public newGame(): void {
+    this.dialog.open(NewGameDialogComponent);
   }
 }

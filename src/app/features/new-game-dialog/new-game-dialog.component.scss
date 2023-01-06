@@ -1,0 +1,36 @@
+.new-game-dialog {
+    padding: 100px;
+    width: 30vw;
+    max-width: 500px;
+    display: flex;  
+    justify-content: center;
+
+    .new-game-dialog-inner {
+        position: relative;
+
+        .title {
+            margin-bottom: 64px;
+        }
+        .close-modal-button {
+            position: absolute;
+            top: -70px;
+            right: -150px;
+            margin-bottom: 32px;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+
+    sudoku-button {
+        display: block;
+        margin-bottom: 24px;
+    }
+}
+
+.inner {
+    width: 100vw;
+}
