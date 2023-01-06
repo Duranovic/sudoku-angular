@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { sudokuInitialPuzzle } from "../constants/sudoku.constant";
+import { sudokuInitialPuzzle, undo_available_moves } from "../constants/sudoku.constant";
 import { cloneMatrix, shuffle } from "../helpers/sudoku.helper";
 import { Undo } from "../interfaces/undo.interface";
 
@@ -13,7 +13,7 @@ export class Sudoku {
         this.puzzle = sudokuInitialPuzzle;
         this.undo = {
             stack: [],
-            available_moves: 5,
+            available_moves: undo_available_moves,
         }
         this.generateSudoku();
     }
@@ -138,7 +138,10 @@ export class Sudoku {
 
     public restartSudoku(): void {
         this.gameplay_puzzle.next(cloneMatrix(this.challenge_puzzle));
-        this.undo.stack = [cloneMatrix(this.challenge_puzzle)];
+        this.undo = {
+            stack: [cloneMatrix(this.challenge_puzzle)],
+            available_moves: undo_available_moves,
+        }
     }
 
     public patchProps(state: any): void {

@@ -12,3 +12,5 @@ export const sudokuInitialPuzzle: number[][] = [
 
   export const latest_sudoku_game = 'latest_sudoku_game';
   export const latest_sudoku_timer = 'latest_sudoku_timer';
+
+  export const undo_available_moves = 5;
