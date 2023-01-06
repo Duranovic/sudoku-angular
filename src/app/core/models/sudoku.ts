@@ -73,17 +73,17 @@ export class Sudoku {
         return false;
     }
 
-    private isValid(puzzle: number[][], row: number, col: number, num: number): boolean {
+    private isValid(puzzle: any[][], row: number, col: number, num: number): boolean {
         // check if the number appears in the same row
         for (let i = 0; i < 9; i++) {
-            if (puzzle[row][i] === num) {
+            if (puzzle[row][i].value === num) {
                 return false;
             }
         }
 
         // check if the number appears in the same column
         for (let i = 0; i < 9; i++) {
-            if (puzzle[i][col] === num) {
+            if (puzzle[i][col].value === num) {
                 return false;
             }
         }
@@ -93,7 +93,7 @@ export class Sudoku {
         let blockCol = Math.floor(col / 3) * 3;
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
-                if (puzzle[blockRow + i][blockCol + j] === num) {
+                if (puzzle[blockRow + i][blockCol + j].value === num) {
                     return false;
                 }
             }
@@ -112,8 +112,7 @@ export class Sudoku {
             let row = Math.floor(Math.random() * 9);
             let col = Math.floor(Math.random() * 9);
             let cell = this.challenge_puzzle[row][col];
-
-            if (cell !== 0 && !removed.some(c => c[0] === row && c[1] === col)) {
+            if (cell.value !== undefined && !removed.some(c => c[0] === row && c[1] === col)) {
                 removed.push([row, col, cell]);
                 this.challenge_puzzle[row][col] = {
                     value: undefined,
@@ -169,7 +168,7 @@ export class Sudoku {
         if (stack_length > 1) {
             this.undo.stack.pop();
             console.log(this.undo.stack);
-            
+
         }
 
         this.undo.available_moves--;
