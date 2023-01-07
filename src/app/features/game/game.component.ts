@@ -17,8 +17,6 @@ export class GameComponent implements OnInit {
   constructor(public sudokuService: SudokuService, public dialog: MatDialog) { }
 
   public array = [...Array(9).keys()];
-  public activeElementRow!: number;
-  public activeElementColumn!: number;
   public sudoku_puzzle?: any;
 
   public ngOnInit(): void {
@@ -29,7 +27,6 @@ export class GameComponent implements OnInit {
 
     if (this.sudokuService.getFromLocalStorage(PatchLocalStorage.Puzzle)) {
       this.sudokuService.getFromLocalStorage(PatchLocalStorage.Timer);
-      console.log(this.sudokuService.puzzle.undo.stack);
       return;
     }
 
@@ -37,20 +34,19 @@ export class GameComponent implements OnInit {
   }
 
   public onClick($event: any): void {
-    const isClickedOnSameElement = this.activeElementRow == $event.target.parentElement?.id[0] && this.activeElementColumn == $event.target.parentElement?.id[1];
+    const isClickedOnSameElement = this.sudokuService.puzzle.activeElementRow == $event.target.parentElement?.id[0] && this.sudokuService.puzzle.activeElementColumn == $event.target.parentElement?.id[1];
 
     if (isClickedOnSameElement) {
-      this.activeElementRow = -1;
-      this.activeElementColumn = -1;
+      this.sudokuService.puzzle.resetActiveFields();
     } else {
-      this.activeElementRow = $event.target.parentElement?.id[0];
-      this.activeElementColumn = $event.target.parentElement?.id[1];
+      this.sudokuService.puzzle.activeElementRow = $event.target.parentElement?.id[0];
+      this.sudokuService.puzzle.activeElementColumn = $event.target.parentElement?.id[1];
     }
   }
 
   public setField(number: number): void {
-    let row = this.activeElementRow;
-    let column = this.activeElementColumn;
+    let row = this.sudokuService.puzzle.activeElementRow;
+    let column = this.sudokuService.puzzle.activeElementColumn;
 
     if (this.sudoku_puzzle[row][column].computed || this.sudoku_puzzle[row][column].value === number)
       return;
@@ -60,10 +56,10 @@ export class GameComponent implements OnInit {
   }
 
   public eraseSelectedField(): void {
-    if (this.sudoku_puzzle[this.activeElementRow][this.activeElementColumn].computed)
+    if (this.sudoku_puzzle[this.sudokuService.puzzle.activeElementRow][this.sudokuService.puzzle.activeElementColumn].computed)
       return;
 
-    this.sudokuService.puzzle.patchCell(this.activeElementRow, this.activeElementColumn, undefined, true);
+    this.sudokuService.puzzle.patchCell(this.sudokuService.puzzle.activeElementRow, this.sudokuService.puzzle.activeElementColumn, undefined, true);
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
   }
 
@@ -72,8 +68,7 @@ export class GameComponent implements OnInit {
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
     this.sudokuService.setLocalStorage(PatchLocalStorage.Timer);
     this.sudokuService.timer?.resetTime();
-    this.activeElementColumn = -1;
-    this.activeElementRow = -1;
+    this.sudokuService.puzzle.resetActiveFields();
   }
 
   public undoPlay(): void {
@@ -86,8 +81,7 @@ export class GameComponent implements OnInit {
     localStorage.clear();
     this.sudokuService.restartGame();
     this.sudokuService.timer?.resetTime();
-    this.activeElementColumn = -1;
-    this.activeElementRow = -1;
+    this.sudokuService.puzzle.resetActiveFields();
   }
 
   public isUndoEnabled(): boolean {

@@ -6,8 +6,10 @@
         
         <h2 class="title">Choose Dificulty</h2>
         
-        <sudoku-button text="Easy"></sudoku-button>
-        <sudoku-button text="Medium"></sudoku-button>
-        <sudoku-button text="Hard"></sudoku-button>
+        <ul>
+            <li *ngFor="let item of game_levels">
+                <sudoku-button [text]="item.buttonText" (clicked)="createNewGame(item)"></sudoku-button>
+            </li>
+        </ul>
     </div>
 </div>

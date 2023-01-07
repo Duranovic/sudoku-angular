@@ -4,24 +4,29 @@ import { cloneMatrix, shuffle } from "../helpers/sudoku.helper";
 import { Undo } from "../interfaces/undo.interface";
 
 export class Sudoku {
-    puzzle: any[][];
+    puzzle!: any[][];
     challenge_puzzle!: any[][];
     undo!: Undo;
     gameplay_puzzle!: BehaviorSubject<any[][]>;
+    activeElementRow!: number;
+    activeElementColumn!: number;
 
     constructor() {
-        this.puzzle = sudokuInitialPuzzle;
+        this.gameplay_puzzle = new BehaviorSubject(cloneMatrix(sudokuInitialPuzzle));
+        this.generateSudoku(5);
+    }
+
+    public generateSudoku(numberOfCellsToRemove: number) {
+        this.puzzle = cloneMatrix(sudokuInitialPuzzle);
         this.undo = {
             stack: [],
             available_moves: undo_available_moves,
         }
-        this.generateSudoku();
-    }
 
-    private generateSudoku() {
         // call the fillPuzzle function to generate the puzzle
         this.fillPuzzle(0, 0);
-        this.removeCells(20);
+        this.removeCells(numberOfCellsToRemove);
+        this.gameplay_puzzle.next(cloneMatrix(this.challenge_puzzle));
         // Add current state to the undo_stack
         this.undo.stack.push(cloneMatrix(this.challenge_puzzle));
     }
@@ -121,8 +126,6 @@ export class Sudoku {
                 };
             }
         }
-
-        this.gameplay_puzzle = new BehaviorSubject(cloneMatrix(this.challenge_puzzle))
     }
 
     public patchCell(row: number, column: number, value: number | undefined, valid: boolean): void {
@@ -142,6 +145,19 @@ export class Sudoku {
             stack: [cloneMatrix(this.challenge_puzzle)],
             available_moves: undo_available_moves,
         }
+    }
+
+    public setActiveElementRow(value: number): void {
+        this.activeElementRow = value;
+    }
+
+    public setActiveElementColumn(value: number): void {
+        this.activeElementColumn = value;
+    }
+
+    public resetActiveFields(): void {
+        this.activeElementColumn = -1;
+        this.activeElementRow = -1;
     }
 
     public patchProps(state: any): void {
