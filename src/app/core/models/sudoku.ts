@@ -147,6 +147,7 @@ export class Sudoku {
 
     public restartSudoku(): void {
         this.gameplay_puzzle.next(cloneMatrix(this.challenge_puzzle));
+        this.mistakes = 0;
         this.undo = {
             stack: [cloneMatrix(this.challenge_puzzle)],
             available_moves: undo_available_moves,
