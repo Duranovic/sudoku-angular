@@ -1,15 +1,22 @@
 <div class="new-game-dialog">
     <div class="new-game-dialog-inner">
-        <button mat-dialog-close class="close-modal-button"> 
-            <img src="assets/images/erase-icon.svg" alt="Erase field">
-        </button>
-        
-        <h2 class="title">Choose Dificulty</h2>
-        
-        <ul>
-            <li *ngFor="let item of game_levels">
-                <sudoku-button [text]="item.buttonText" (clicked)="createNewGame(item)"></sudoku-button>
-            </li>
-        </ul>
+        <ng-container *ngIf="!game_over; else gameOver">
+            <button mat-dialog-close class="close-modal-button"> 
+                <img src="assets/images/erase-icon.svg" alt="Erase field">
+            </button>
+            
+            <h2 class="title">Choose Dificulty</h2>
+            <ul>
+                <li *ngFor="let item of game_levels">
+                    <sudoku-button [text]="item.buttonText" (clicked)="createNewGame(item.numberOfRemovedFields)"></sudoku-button>
+                </li>
+            </ul>
+        </ng-container>
+        <ng-template #gameOver>
+            <h2 class="title">Game over!</h2>
+            <p>You have failed to complete the sudoku puzzle. Better luck next time. Click the "Try Again" button for a second chance or the "New Game" button to start a new puzzle.</p>
+            <sudoku-button text="One more chance!" (clicked)="secondChance()"></sudoku-button>
+            <sudoku-button text="Play new game!" (clicked)="newGame()"></sudoku-button>
+        </ng-template>
     </div>
 </div>

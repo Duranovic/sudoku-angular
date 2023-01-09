@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
 import { Buffer } from 'buffer';
 import { latest_sudoku_game, latest_sudoku_timer } from 'src/app/core/constants/sudoku.constant';
@@ -10,7 +10,7 @@ import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.compo
 
 @Component({
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
 
@@ -53,6 +53,9 @@ export class GameComponent implements OnInit {
 
     this.sudokuService.patchCell(row, column, number);
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
+    if(this.sudokuService.puzzle.isGameOver()) {
+      this.newGame(true);
+    }
   }
 
   public eraseSelectedField(): void {
@@ -90,7 +93,17 @@ export class GameComponent implements OnInit {
     return isUndoMovesLeft && isUndoStackChanged;
   }
 
-  public newGame(): void {
-    this.dialog.open(NewGameDialogComponent);
+  public newGame(gameOver: boolean = false): void {
+    this.dialog.open(NewGameDialogComponent, {
+      disableClose: gameOver,
+      data: {
+        gameOver,
+      }
+    });
+  }
+
+  public createLifesArray() {
+    let numberOfLifes = 3 - this.sudokuService.puzzle.mistakes;
+    return [...Array(numberOfLifes).keys()];
   }
 }

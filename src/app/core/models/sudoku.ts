@@ -8,6 +8,7 @@ export class Sudoku {
     challenge_puzzle!: any[][];
     undo!: Undo;
     gameplay_puzzle!: BehaviorSubject<any[][]>;
+    mistakes!: number;
     activeElementRow!: number;
     activeElementColumn!: number;
 
@@ -17,6 +18,7 @@ export class Sudoku {
     }
 
     public generateSudoku(numberOfCellsToRemove: number) {
+        this.mistakes = 0;
         this.puzzle = cloneMatrix(sudokuInitialPuzzle);
         this.undo = {
             stack: [],
@@ -137,6 +139,10 @@ export class Sudoku {
         };
         this.gameplay_puzzle.next(current_gameplay);
         this.updateUndoStack();
+        
+        if(!valid) {
+            this.mistakes++;
+        }
     }
 
     public restartSudoku(): void {
@@ -165,6 +171,7 @@ export class Sudoku {
         this.challenge_puzzle = cloneMatrix(state.challenge_puzzle);
         this.gameplay_puzzle.next(state.gameplay_puzzle);
         this.undo = state.undo;
+        this.mistakes = state.mistakes;
     }
 
     public updateUndoStack() {
@@ -199,6 +206,11 @@ export class Sudoku {
             challenge_puzzle: this.challenge_puzzle,
             puzzle: this.puzzle,
             undo: this.undo,
+            mistakes: this.mistakes,
         }
+    }
+
+    public isGameOver(): boolean {
+        return this.mistakes === 3;
     }
 }

@@ -10,12 +10,19 @@
 </div>
 
 <div class="sudoku-controls-container">
-    <sudoku-timer></sudoku-timer>
+    <div class="sudoku-controls-container-header">
+        <sudoku-timer></sudoku-timer>
+        <div class="lifes-left">
+            <!-- TODO: DRY (Don't Repeat yourself) -->
+            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 3}"/>
+            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 2}"/>
+            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 1}"/>
+        </div>
+    </div>
     <ul class="numbers">
         <li *ngFor="let item of array">
             <button (click)="setField(item + 1)">
                 <span class="main-number">{{item + 1}}</span>
-                <!-- <span class="number-of-fields-left">5</span> -->
             </button>
         </li>            
     </ul>

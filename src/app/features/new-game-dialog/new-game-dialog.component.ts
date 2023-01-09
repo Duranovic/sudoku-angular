@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
 
@@ -11,10 +11,12 @@ import { SudokuService } from 'src/app/core/services/sudoku.service';
 })
 export class NewGameDialogComponent implements OnInit {
   public game_levels!: any[];
-  
-  constructor(private dialogRef: MatDialogRef<NewGameDialogComponent>, private sudokuService: SudokuService) { }
+  public game_over: boolean = false;
+
+  constructor(private dialogRef: MatDialogRef<NewGameDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { gameOver: boolean }, private sudokuService: SudokuService) { }
 
   public ngOnInit(): void {
+    this.game_over = this.data.gameOver;
     this.game_levels = [
       {
         buttonText: "Easy",
@@ -35,11 +37,22 @@ export class NewGameDialogComponent implements OnInit {
     ]
   }
 
-  public createNewGame(game_level: any): void {
-    this.sudokuService.puzzle.generateSudoku(game_level.numberOfRemovedFields);
+  public createNewGame(numberOfRemovedFields: number): void {
+    this.sudokuService.puzzle.generateSudoku(numberOfRemovedFields);
     this.sudokuService.puzzle.resetActiveFields();
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
     this.sudokuService.timer.resetTime();
+    this.dialogRef.close();
+  }
+
+  public newGame() {
+    this.game_over = false;
+    this.dialogRef.disableClose = false;
+  }
+
+  public secondChance(): void {
+    this.sudokuService.puzzle.mistakes--;
+    this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
     this.dialogRef.close();
   }
 }

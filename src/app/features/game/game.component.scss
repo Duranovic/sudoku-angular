@@ -40,6 +40,27 @@
     align-items: center;
     gap: 36px;
 
+    .sudoku-controls-container-header {
+        display: flex;
+        align-items: center;
+        gap: 46px;
+
+        .lifes-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            img {
+                width: 24px;
+                height: 24px;
+
+                &.hide {
+                    animation: life-animation .5s forwards;
+                }
+            }
+        }
+    }
+
     .numbers {
         display: flex;
         flex-wrap: wrap;
@@ -273,4 +294,21 @@
 sudoku-button{
     width: 100%;
     text-align: center;
+}
+
+@keyframes life-animation {
+    0% {
+        opacity: 1;
+        scale: 1;
+    }
+
+    50% {
+        opacity: 1;
+        scale: 1.2;
+    }
+
+    100% {
+        opacity: 0;
+        scale: 1;
+    }
 }
