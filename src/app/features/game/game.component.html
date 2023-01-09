@@ -1,12 +1,18 @@
 <div class="sudoku-grid">
-    <div *ngFor="let row of array; let i = index" class="flex" [ngClass]="{'active-row': i == sudokuService.puzzle.activeElementRow}">
-        <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()" [ngClass]="{'active-column': j == sudokuService.puzzle.activeElementColumn}">
-            <button (click)="onClick($event); $event.stopPropagation()" [ngClass]="{'active': i == sudokuService.puzzle.activeElementRow && j == sudokuService.puzzle.activeElementColumn}">
-                <span class="number-value" [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid}">{{ sudoku_puzzle[i][j]?.value }}</span>
-                <span class="pattern" [ngClass]="{'show': i == sudokuService.puzzle.activeElementRow || j == sudokuService.puzzle.activeElementColumn}"></span>
+    <div *ngFor="let row of array; let i = index" class="flex"
+        [ngClass]="{'active-row': i == sudokuService.puzzle.activeElementRow}">
+        <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()"
+            [ngClass]="{'active-column': j == sudokuService.puzzle.activeElementColumn}">
+            <button (click)="onClick($event); $event.stopPropagation()"
+                [ngClass]="{'active': i == sudokuService.puzzle.activeElementRow && j == sudokuService.puzzle.activeElementColumn}">
+                <span class="number-value"
+                    [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid}">{{
+                    sudoku_puzzle[i][j]?.value }}</span>
+                <span class="pattern"
+                    [ngClass]="{'show': i == sudokuService.puzzle.activeElementRow || j == sudokuService.puzzle.activeElementColumn}"></span>
             </button>
         </div>
-    </div>    
+    </div>
 </div>
 
 <div class="sudoku-controls-container">
@@ -14,9 +20,12 @@
         <sudoku-timer></sudoku-timer>
         <div class="lifes-left">
             <!-- TODO: DRY (Don't Repeat yourself) -->
-            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 3}"/>
-            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 2}"/>
-            <img  src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game" [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 1}"/>
+            <img src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game"
+                [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 3}" />
+            <img src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game"
+                [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 2}" />
+            <img src="assets/images/awesome-brain-icon.svg" alt="Brain icon that represents life in game"
+                [ngClass]="{'hide': sudokuService.puzzle.mistakes >= 1}" />
         </div>
     </div>
     <ul class="numbers">
@@ -24,7 +33,7 @@
             <button (click)="setField(item + 1)">
                 <span class="main-number">{{item + 1}}</span>
             </button>
-        </li>            
+        </li>
     </ul>
     <ul class="action-controls">
         <li>
