@@ -43,7 +43,8 @@
             </button>
         </li>
         <li>
-            <button (click)="eraseSelectedField()">
+            <!-- Button disabled - checking if cell is selected (it is enough to check only for one property - row or column) -->
+            <button (click)="eraseSelectedField()" [disabled]="!(sudokuService.puzzle.activeElementRow >= 0)">
                 <img src="assets/images/erase-icon.svg" alt="Erase field">
                 <span class="label">Erase</span>
             </button>
