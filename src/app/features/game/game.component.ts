@@ -1,10 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
-import { Buffer } from 'buffer';
-import { latest_sudoku_game, latest_sudoku_timer } from 'src/app/core/constants/sudoku.constant';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
-import { BehaviorSubject } from 'rxjs';
-import { Timer } from 'src/app/core/models/timer';
 import { MatDialog } from '@angular/material/dialog';
 import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.component';
 
@@ -79,14 +75,6 @@ export class GameComponent implements OnInit {
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
   }
 
-  // TODO: Will be removed, its only for DEV purposes
-  public clearStorage() {
-    localStorage.clear();
-    this.sudokuService.restartGame();
-    this.sudokuService.timer?.resetTime();
-    this.sudokuService.puzzle.resetActiveFields();
-  }
-
   public isUndoEnabled(): boolean {
     let isUndoMovesLeft = this.sudokuService.puzzle.undo.available_moves > 0;
     let isUndoStackChanged = this.sudokuService.puzzle.undo.stack.length > 1;
@@ -100,10 +88,5 @@ export class GameComponent implements OnInit {
         gameOver,
       }
     });
-  }
-
-  public createLifesArray() {
-    let numberOfLifes = 3 - this.sudokuService.puzzle.mistakes;
-    return [...Array(numberOfLifes).keys()];
   }
 }
