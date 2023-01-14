@@ -1,24 +1,52 @@
+@use '/src/styles/abstracts/mixins';
+
+
 :host {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 50px 100px 0;
+
+    @include mixins.for-phone-only{
+        padding: 0 24px;
+        flex-direction: column-reverse;
+        height: 100%;
+    }
 }
 
 .content {
     position: relative;
     top: -70px;
 
+    @include mixins.for-phone-only{
+        display: none;
+    }
+
     p {
         margin-top: 32px;
         max-width: 450px;
-        line-height: 22px;
+        line-height: 1.2;
         margin-bottom: 32px;
+        max-width: 30vw;
+
+        @include mixins.for-desktop-up{
+            font-size: 1.05vw;
+        }
+
+        @include mixins.for-big-desktop-up {
+            font-size: 0.85vw;
+            max-width: 20vw;
+            margin-bottom: 1.6vw;
+        }
     }
 
     h1 {
-        font-size: 42px;
+        font-size: 2.5vw;
         margin-bottom: 32px;
         filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
+
+        @include mixins.for-desktop-up{
+            font-size: 2.5vw;
+        }
     }
 }

@@ -1,4 +1,19 @@
 @use '/src/styles/abstracts/colors';
+@use '/src/styles/abstracts/mixins';
+
+:host {
+  flex-grow: 1;
+  max-width: 30%;
+
+  @include mixins.for-phone-only{
+    max-width: 100%;
+}
+
+  @include mixins.for-big-desktop-up {
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
 
 .mobile-app-container {
   display: flex;
@@ -6,9 +21,29 @@
   align-items: center;
   gap: 32px;
 
-  img {
-    width: 450px;
+  @include mixins.for-phone-only {
+    height: 100%;
+    gap: 64px;
   }
+
+  img {
+    width: 350px;
+
+    @include mixins.for-big-desktop-up {
+      width: 22vw;
+    }
+  }
+
+  sudoku-button-link {
+    display: none;
+    @include mixins.for-phone-only {
+      display: block;
+      flex-grow: 1;
+      width: 70%;
+    }
+  }
+
+
 
   .notify-me {
     display: flex;
@@ -17,10 +52,18 @@
     gap: 16px;
     width: 100%;
 
+    @include mixins.for-phone-only {
+      flex-grow: 1;
+    }
+
     h3 {
       position: relative;
       display: inline-block;
       margin-bottom: 30px;
+
+      @include mixins.for-big-desktop-up {
+        font-size: 0.85vw;
+      }
 
       &::after {
         content: "";
@@ -64,6 +107,11 @@
         flex-grow: 1;
         color: colors.$white;
         transition: opacity 0.3s;
+
+        @include mixins.for-big-desktop-up {
+          font-size: 0.7vw;
+         }
+
         &:focus {
           outline: none;
         }
@@ -90,6 +138,11 @@
         transition: width 1s, background-color 0.3s ease-in-out,
           opacity 0.3s ease-in-out;
 
+          @include mixins.for-big-desktop-up {
+            font-size: 0.65vw;
+            min-height: 2.7vw;
+           }
+
         span {
           transition: opacity 0.3s 0.8s ease-in-out, font-weight 0.1s 0.5s;
         }
@@ -111,6 +164,7 @@
         transition: width 0.8s ease-in-out;
         width: 0px;
       }
+
       &::after {
         background-color: colors.$blue--dark;
       }
@@ -124,9 +178,11 @@
       &.success {
         padding: 0;
         border-radius: 16px;
+
         &::after {
           width: 100%;
         }
+
         input {
           opacity: 0;
         }
@@ -137,6 +193,7 @@
           }
         }
       }
+
       &.loading {
         button {
           span {
@@ -144,12 +201,15 @@
           }
         }
       }
+
       &.success {
         &::before {
           width: 100%;
         }
+
         button {
           pointer-events: none;
+
           span {
             position: absolute;
             left: 50%;
@@ -160,6 +220,7 @@
           }
         }
       }
+
       &.invalid {
         button {
           opacity: 0.5;

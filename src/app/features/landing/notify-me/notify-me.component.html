@@ -1,5 +1,6 @@
 <div class="mobile-app-container">
 	<img src="assets/images/mobile-game.svg" alt="Mobile game" />
+    <sudoku-button-link text="Play Now" route="/game"></sudoku-button-link>
 	<form class="notify-me" [formGroup]="form" (ngSubmit)="onSubmit()">
 		<h3>Coming soon on mobile devices!</h3>
 		<div class="velc-input" [ngClass]="{'invalid': !form.valid, 'loading': loading, 'success': success}">

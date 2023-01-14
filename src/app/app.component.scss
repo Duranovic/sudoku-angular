@@ -1,3 +1,5 @@
+@use '/src/styles/abstracts/mixins';
+
 main {
     display: flex;
     flex-direction: column;
@@ -8,5 +10,10 @@ main {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        @include mixins.for-phone-only{
+            justify-content: flex-start;
+            padding: 45px 0;
+        }
     }
 }

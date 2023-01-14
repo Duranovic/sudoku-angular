@@ -1,4 +1,5 @@
 @use '/src/styles/abstracts/colors';
+@use '/src/styles/abstracts/mixins';
 
 header{
     display: flex;
@@ -12,6 +13,10 @@ header{
             position: relative;
             filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
     
+            @include mixins.for-desktop-up {
+                font-size: 1.5vw;
+            }
+
             span{
                 font-size: 12px;
                 padding: 0 4px;
@@ -21,6 +26,11 @@ header{
                 position: absolute;
                 right: 0;
                 bottom: -14px;
+
+                @include mixins.for-desktop-up {
+                    font-size: 0.6vw;
+                    bottom: -1em;
+                }
             }
         }
     }

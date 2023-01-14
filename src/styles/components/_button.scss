@@ -1,3 +1,5 @@
+@use '/src/styles/abstracts/mixins';
+
 .button {
     display: inline-block;
     text-align: center;
@@ -14,6 +16,22 @@
     border-radius: 5px;
     cursor: pointer;
     transition: opacity .3s ease-out;
+
+    @include mixins.for-phone-only {
+        max-width: 100%;
+    }
+
+    @include mixins.for-desktop-up {
+        font-size: 0.95vw;
+        padding: 1.3em 1.5em;
+    }
+
+    @include mixins.for-big-desktop-up {
+        font-size: 0.75vw;
+        padding: 1.5em 1em;
+        max-width: 11vw;
+    }
+
 
     &:hover{
         opacity: 0.8;
