@@ -13,7 +13,7 @@ main {
 
         @include mixins.for-phone-only{
             justify-content: flex-start;
-            padding: 45px 0;
+            padding: 24px 0;
         }
     }
 }

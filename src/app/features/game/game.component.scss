@@ -1,9 +1,15 @@
 @use '/src/styles/abstracts/colors';
+@use '/src/styles/abstracts/mixins';
 
 :host{
     display: flex;
     gap: 32px;
     padding: 140px;
+
+    @include mixins.for-phone-only {
+        flex-direction: column;
+        padding: 0 24px 0;
+    }
 }
 
 .sudoku-grid{
@@ -21,6 +27,10 @@
         left: 39.8%;
         transform: translateX(-50%);
         background-color: colors.$white;
+
+        @include mixins.for-phone-only {
+            left: 31%;
+        }
     }
 
     &::before{
@@ -31,6 +41,10 @@
         right: 39.8%;
         transform: translateX(50%);
         background-color: colors.$white;
+
+        @include mixins.for-phone-only {
+            right: 31%;
+        }
     }
 }
 .sudoku-controls-container{
@@ -39,6 +53,10 @@
     flex-direction: column;
     align-items: center;
     gap: 36px;
+
+    @include mixins.for-phone-only {
+        gap: 7vw;
+    }
 
     .sudoku-controls-container-header {
         display: flex;
@@ -83,6 +101,11 @@
                 cursor: pointer;
                 transition: opacity .3s ease-in-out, background-color .3s ease-in-out;
 
+                @include mixins.for-phone-only {
+                    width: 45px;
+                    height: 45px;
+                }
+
                 span{
                     line-height: 1;      
                     transition: color .3s ease-in-out;              
@@ -91,6 +114,10 @@
                 .main-number {
                     font-size: 26px;
                     font-weight: bold;
+
+                    @include mixins.for-phone-only {
+                        font-size: 22px;
+                    }
                 }
 
                 .number-of-fields-left {
@@ -115,6 +142,10 @@
         justify-content: space-evenly;
         width: 100%;
         max-width: 350px;        
+
+        @include mixins.for-phone-only {
+            margin-top: 16px;
+        }
 
         li {    
             button {
@@ -170,6 +201,11 @@
     justify-content: center;
     align-items: stretch;
     position: relative;
+
+    @include mixins.for-phone-only {
+        width: 43px;
+        height: 40px;
+    }
     
     &:not(:last-child){
         // Right border
