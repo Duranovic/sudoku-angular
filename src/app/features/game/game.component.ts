@@ -3,6 +3,8 @@ import { SudokuService } from 'src/app/core/services/sudoku.service';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.component';
+import { SoundService } from 'src/app/core/services/sound.service';
+import { SoundsEnum } from 'src/app/core/enums/sound.enum';
 
 @Component({
   templateUrl: './game.component.html',
@@ -10,12 +12,13 @@ import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.compo
 })
 export class GameComponent implements OnInit {
 
-  constructor(public sudokuService: SudokuService, public dialog: MatDialog) { }
+  constructor(public sudokuService: SudokuService, private soundService: SoundService, public dialog: MatDialog) { }
 
   public array = [...Array(9).keys()];
   public sudoku_puzzle?: any;
 
   public ngOnInit(): void {
+    this.soundService.playSound(SoundsEnum.BACKGROUND);
     this.sudokuService.puzzle.gameplay_puzzle.subscribe(x => {
       this.sudoku_puzzle = x;
       this.sudokuService.timer.startTimer();
@@ -31,7 +34,7 @@ export class GameComponent implements OnInit {
 
   public onClick($event: any): void {
     const isClickedOnSameElement = this.sudokuService.puzzle.activeElementRow == $event.target.parentElement?.id[0] && this.sudokuService.puzzle.activeElementColumn == $event.target.parentElement?.id[1];
-
+    this.soundService.playSound(SoundsEnum.INTERACT);
     if (isClickedOnSameElement) {
       this.sudokuService.puzzle.resetActiveFields();
     } else {
@@ -44,17 +47,24 @@ export class GameComponent implements OnInit {
     let row = this.sudokuService.puzzle.activeElementRow;
     let column = this.sudokuService.puzzle.activeElementColumn;
 
-    if (this.sudoku_puzzle[row][column].computed || this.sudoku_puzzle[row][column].value === number)
+    if (this.sudoku_puzzle[row][column].computed || this.sudoku_puzzle[row][column].value === number) {
+      this.soundService.playSound(SoundsEnum.INTERACT);
       return;
+    }
 
-    this.sudokuService.patchCell(row, column, number);
+    let isMoveRight = this.sudokuService.patchCell(row, column, number);
+    isMoveRight ? this.soundService.playSound(SoundsEnum.RIGHT_MOVE) : this.soundService.playSound(SoundsEnum.WRONG_MOVE);
+
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
     if(this.sudokuService.puzzle.isGameOver()) {
+      this.soundService.playSound(SoundsEnum.GAME_OVER);
       this.newGame(true);
     }
   }
 
   public eraseSelectedField(): void {
+    this.soundService.playSound(SoundsEnum.INTERACT);
+
     if (this.sudoku_puzzle[this.sudokuService.puzzle.activeElementRow][this.sudokuService.puzzle.activeElementColumn].computed)
       return;
 

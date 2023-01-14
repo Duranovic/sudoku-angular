@@ -18,9 +18,10 @@ export class SudokuService {
     this.timer = new Timer();
   }
 
-  public patchCell(row: number, column: number, value: number | undefined) {
+  public patchCell(row: number, column: number, value: number | undefined): boolean {
     let valid: boolean = this.puzzle.puzzle[row][column].value === value;
     this.puzzle?.patchCell(row, column, value, valid);
+    return valid;
   }
 
   public restartGame(): void {

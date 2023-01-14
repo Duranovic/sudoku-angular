@@ -6,6 +6,9 @@ export const environment = {
   production: false
 };
 
+export const sounds_folder_path = 'assets/sounds/';
+export const images_folder_path = 'assets/images/';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
