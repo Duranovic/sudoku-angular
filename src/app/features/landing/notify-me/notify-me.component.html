@@ -1,5 +1,10 @@
 <div class="mobile-app-container">
-	<img src="assets/images/mobile-game.svg" alt="Mobile game" />
+    <picture>
+        <source media="(max-width: 599px)" srcset="assets/images/mobile-game@1x.png" />
+        <source media="(min-width: 600px)" srcset="assets/images/mobile-game@2x.png" />
+        <img src="assets/images/mobile-game@2x.png" alt="Sudoku mobile game comming soon" />
+      </picture>
+
     <sudoku-button-link text="Play Now" route="/game"></sudoku-button-link>
 	<form class="notify-me" [formGroup]="form" (ngSubmit)="onSubmit()">
 		<h3>Coming soon on mobile devices!</h3>
