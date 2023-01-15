@@ -18,7 +18,6 @@ export class GameComponent implements OnInit {
   public sudoku_puzzle?: any;
 
   public ngOnInit(): void {
-    this.soundService.playSound(SoundsEnum.BACKGROUND);
     this.sudokuService.puzzle.gameplay_puzzle.subscribe(x => {
       this.sudoku_puzzle = x;
       this.sudokuService.timer.startTimer();
@@ -90,6 +89,7 @@ export class GameComponent implements OnInit {
     let isUndoStackChanged = this.sudokuService.puzzle.undo.stack.length > 1;
     return isUndoMovesLeft && isUndoStackChanged;
   }
+
 
   public newGame(gameOver: boolean = false): void {
     this.dialog.open(NewGameDialogComponent, {

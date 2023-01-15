@@ -6,14 +6,12 @@ import { SoundsEnum } from '../enums/sound.enum';
   providedIn: 'root'
 })
 export class SoundService {
-  private [SoundsEnum.BACKGROUND]!: HTMLAudioElement;
   private [SoundsEnum.WRONG_MOVE]!: HTMLAudioElement;
   private [SoundsEnum.RIGHT_MOVE]!: HTMLAudioElement;
   private [SoundsEnum.GAME_OVER]!: HTMLAudioElement;
   private [SoundsEnum.INTERACT]!: HTMLAudioElement;
 
   constructor() { 
-    this[SoundsEnum.BACKGROUND] = new Audio(`${sounds_folder_path}cottagecore.mp3`);
     this[SoundsEnum.WRONG_MOVE] = new Audio(`${sounds_folder_path}wrong-click.mp3`);
     this[SoundsEnum.RIGHT_MOVE] = new Audio(`${sounds_folder_path}success_bell.mp3`);
     this[SoundsEnum.INTERACT] = new Audio(`${sounds_folder_path}select-sound.mp3`);
@@ -22,8 +20,6 @@ export class SoundService {
   }
 
   private configureSounds(): void {
-    this[SoundsEnum.BACKGROUND].volume = 0.1;
-    this[SoundsEnum.BACKGROUND].loop = true;
     this[SoundsEnum.WRONG_MOVE].volume = 0.1;
     this[SoundsEnum.RIGHT_MOVE].volume = 0.5;
     this[SoundsEnum.INTERACT].volume = 0.5;
