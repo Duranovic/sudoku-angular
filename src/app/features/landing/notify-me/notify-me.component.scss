@@ -23,11 +23,16 @@
 
   @include mixins.for-phone-only {
     height: 100%;
-    gap: 64px;
+    gap: 24px;
+    justify-content: space-around;
   }
 
   img {
     width: 350px;
+
+    @include mixins.for-phone-only {
+      width: 95%;
+    }
 
     @include mixins.for-big-desktop-up {
       width: 22vw;
@@ -38,7 +43,6 @@
     display: none;
     @include mixins.for-phone-only {
       display: block;
-      flex-grow: 1;
       width: 70%;
     }
   }
@@ -51,10 +55,6 @@
     align-items: center;
     gap: 16px;
     width: 100%;
-
-    @include mixins.for-phone-only {
-      flex-grow: 1;
-    }
 
     h3 {
       position: relative;
@@ -137,6 +137,12 @@
         height: 100%;
         transition: width 1s, background-color 0.3s ease-in-out,
           opacity 0.3s ease-in-out;
+
+          @include mixins.for-phone-only {
+            padding: 19px 12px;
+            min-width: 89px;
+            min-height: 50px;
+          }
 
           @include mixins.for-big-desktop-up {
             font-size: 0.65vw;
