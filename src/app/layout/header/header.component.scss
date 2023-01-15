@@ -14,18 +14,20 @@ header {
             padding: 0 16px 0 32px;
         }
 
-        h1 {
-            @include mixins.for-phone-only {
-                font-size: 14px;
-                margin: 5px 0;
-                color: black;
-            }
-
-            span {
+        a {
+            h1 {
                 @include mixins.for-phone-only {
-                    display: none;
+                    font-size: 15px;
+                    margin: 6px 0;
+                    color: black;
                 }
-            }
+    
+                span {
+                    @include mixins.for-phone-only {
+                        display: none;
+                    }
+                }
+            }   
         }
 
         .fullscreen-btn {
