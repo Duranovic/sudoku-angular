@@ -2,5 +2,9 @@
     <a routerLink="/">
         <h1>Sudoku <span>velc</span></h1>
     </a>
+    <button (click)="toggleFullScreen()" class="fullscreen-btn">
+        <img [src]="fullScreen.imagePath">
+        {{ fullScreen.text }}
+    </button>
 </header>
    

@@ -23,8 +23,8 @@
 
   @include mixins.for-phone-only {
     height: 100%;
-    gap: 24px;
     justify-content: space-around;
+    gap: 0;
   }
 
   img {
