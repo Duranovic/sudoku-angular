@@ -1,25 +1,28 @@
 @use '/src/styles/abstracts/colors';
 @use '/src/styles/abstracts/mixins';
 
-:host{
+:host {
     display: flex;
     gap: 32px;
     padding: 140px;
 
     @include mixins.for-phone-only {
         flex-direction: column;
-        padding: 0 24px 0;
+        margin: 0 12px;
+        padding: 0;
+        gap: 7vw;
+        height: 100%;
     }
 }
 
-.sudoku-grid{
+.sudoku-grid {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 
-    &::after{
+    &::after {
         content: '';
         position: absolute;
         width: 1px;
@@ -33,7 +36,7 @@
         }
     }
 
-    &::before{
+    &::before {
         content: '';
         position: absolute;
         width: 1px;
@@ -47,7 +50,8 @@
         }
     }
 }
-.sudoku-controls-container{
+
+.sudoku-controls-container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -56,6 +60,7 @@
 
     @include mixins.for-phone-only {
         gap: 7vw;
+        justify-content: space-between;
     }
 
     .sudoku-controls-container-header {
@@ -86,8 +91,13 @@
         max-width: 400px;
         gap: 16px;
 
+        @include mixins.for-phone-only {
+            max-width: 280px;
+            gap: 12px;
+        }
+
         li {
-            button{
+            button {
                 background-color: transparent;
                 border: 1px solid gainsboro;
                 border-radius: 50%;
@@ -106,9 +116,9 @@
                     height: 45px;
                 }
 
-                span{
-                    line-height: 1;      
-                    transition: color .3s ease-in-out;              
+                span {
+                    line-height: 1;
+                    transition: color .3s ease-in-out;
                 }
 
                 .main-number {
@@ -128,7 +138,7 @@
                 &:hover {
                     background-color: colors.$white;
 
-                    span{
+                    span {
                         color: colors.$black;
                     }
                 }
@@ -136,18 +146,21 @@
         }
     }
 
-    .action-controls{
+    .action-controls {
         margin-top: 32px;
         display: flex;
         justify-content: space-evenly;
         width: 100%;
-        max-width: 350px;        
+        max-width: 350px;
 
         @include mixins.for-phone-only {
             margin-top: 16px;
+            margin-top: 1vh;
+            flex-grow: 1;
+            align-items: flex-end;
         }
 
-        li {    
+        li {
             button {
                 position: relative;
                 display: flex;
@@ -157,7 +170,8 @@
                 transition: opacity .22s;
 
                 &:hover {
-                    img, .label {
+                    sudoku-icon,
+                    .label {
                         opacity: 0.5;
                     }
                 }
@@ -168,11 +182,14 @@
                     cursor: default;
                 }
 
-                img{
+                img {
                     height: 20px;
                 }
 
-                .img, .label, .available-undo-moves {
+                sudoku-icon,
+                .img,
+                .label,
+                .available-undo-moves {
                     transition: opacity .22s;
                 }
 
@@ -194,7 +211,7 @@
     }
 }
 
-.box{
+.box {
     width: 55px;
     height: 48px;
     display: flex;
@@ -203,13 +220,15 @@
     position: relative;
 
     @include mixins.for-phone-only {
-        width: 43px;
-        height: 40px;
+        width: auto;
+        height: auto;
+        flex-grow: 1;
     }
-    
-    &:not(:last-child){
+
+    &:not(:last-child) {
+
         // Right border
-        &::after{
+        &::after {
             content: '';
             position: absolute;
             width: 1px;
@@ -222,7 +241,7 @@
     }
 
 
-    button{
+    button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -231,7 +250,7 @@
         flex: 1;
         position: relative;
 
-        &.active{
+        &.active {
             .number-value {
                 position: relative;
                 z-index: 100;
@@ -268,7 +287,7 @@
             }
         }
 
-        span{
+        span {
             pointer-events: none;
         }
 
@@ -280,19 +299,20 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background-image: repeating-linear-gradient(to bottom right, transparent 10%,  rgba(160, 160, 160, 0.236) 10% 15%, transparent 15% 25%);
+            background-image: repeating-linear-gradient(to bottom right, transparent 10%, rgba(160, 160, 160, 0.236) 10% 15%, transparent 15% 25%);
             z-index: 19;
             opacity: 0;
 
-            &.show{
+            &.show {
                 animation: pattern-show forwards .5s;
             }
 
             @keyframes pattern-show {
-                0%{
+                0% {
                     opacity: 0;
                 }
-                100%{
+
+                100% {
                     opacity: 1;
                 }
             }
@@ -300,13 +320,18 @@
     }
 }
 
-.flex{
+.flex {
     display: flex;
-    
-    &:not(:last-child){
-            // Bottom border
-        .box{
-            &::before{
+
+    @include mixins.for-phone-only {
+        width: 100%;
+    }
+
+    &:not(:last-child) {
+
+        // Bottom border
+        .box {
+            &::before {
                 content: '';
                 position: absolute;
                 width: 70%;
@@ -320,16 +345,19 @@
     }
 
     &:nth-child(3n) {
-        &:not(:last-child){
+        &:not(:last-child) {
             border-bottom: 1px solid colors.$white;
         }
     }
 }
 
-
-sudoku-button{
-    width: 100%;
+.new-game-btn-desktop {
+    width: 90%;
     text-align: center;
+
+    @include mixins.for-phone-only {
+        display: none;
+    }
 }
 
 @keyframes life-animation {
@@ -346,5 +374,21 @@ sudoku-button{
     100% {
         opacity: 0;
         scale: 1;
+    }
+}
+
+.new-game-list-item {
+    display: none;
+
+    @include mixins.for-phone-only {
+        display: inline-block;
+    }
+
+    .new-game-btn {
+        background-color: white;
+        padding: 14px;
+        border-radius: 50%;
+        bottom: -10px;
+        box-shadow: 0 0 4px grey;
     }
 }

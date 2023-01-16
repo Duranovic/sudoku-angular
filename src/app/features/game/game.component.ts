@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.component';
 import { SoundService } from 'src/app/core/services/sound.service';
 import { SoundsEnum } from 'src/app/core/enums/sound.enum';
+import { SvgSize } from 'src/app/core/enums/icon.enums';
 
 @Component({
   templateUrl: './game.component.html',
@@ -29,6 +30,10 @@ export class GameComponent implements OnInit {
     }
 
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
+  }
+
+  get SvgSize(){
+    return SvgSize;
   }
 
   public onClick($event: any): void {

@@ -45,8 +45,13 @@
         <li>
             <!-- Button disabled - checking if cell is selected (it is enough to check only for one property - row or column) -->
             <button (click)="eraseSelectedField()" [disabled]="!(sudokuService.puzzle.activeElementRow >= 0)">
-                <img src="assets/images/erase-icon.svg" alt="Erase field">
+                <sudoku-icon name="icon-cross" color="white" [size]="SvgSize.small"></sudoku-icon>
                 <span class="label">Erase</span>
+            </button>
+        </li>
+        <li class="new-game-list-item">
+            <button class="new-game-btn" (click)="newGame()">
+                 <sudoku-icon name="icon-cross" color="grey" [size]="SvgSize.small" [rotate]=45></sudoku-icon>
             </button>
         </li>
         <li>
@@ -63,5 +68,5 @@
             </button>
         </li>
     </ul>
-    <sudoku-button text="New game" (clicked)="newGame()"></sudoku-button>
+    <sudoku-button class="new-game-btn-desktop" text="New game" (clicked)="newGame()"></sudoku-button>
 </div>
