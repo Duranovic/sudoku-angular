@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SvgSize } from 'src/app/core/enums/icon.enums';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
 
@@ -35,6 +36,10 @@ export class NewGameDialogComponent implements OnInit {
         numberOfRemovedFields: 60,
       },
     ]
+  }
+
+  get SvgSize(){
+    return SvgSize;
   }
 
   public createNewGame(numberOfRemovedFields: number): void {

@@ -2,15 +2,20 @@
     <div class="new-game-dialog-inner">
         <ng-container *ngIf="!game_over; else gameOver">
             <button mat-dialog-close class="close-modal-button"> 
-                <img src="assets/images/erase-icon.svg" alt="Erase field">
+                <sudoku-icon name="icon-cross" color="white" [size]="SvgSize.small"></sudoku-icon>
             </button>
             
             <h2 class="title">Choose Dificulty</h2>
-            <ul>
+            <ul class="list-of-actions">
                 <li *ngFor="let item of game_levels">
                     <sudoku-button [text]="item.buttonText" (clicked)="createNewGame(item.numberOfRemovedFields)"></sudoku-button>
                 </li>
             </ul>
+            <div class="close-dialog-mobile-container">
+                <button mat-dialog-close class="close-dialog-mobile">
+                    <sudoku-icon name="icon-cross" color="white" [size]="SvgSize.small"></sudoku-icon>
+                </button>
+            </div>
         </ng-container>
         <ng-template #gameOver>
             <h2 class="title">Game over!</h2>

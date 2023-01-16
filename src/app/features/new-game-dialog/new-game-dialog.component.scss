@@ -1,3 +1,5 @@
+@use "/src/styles/abstracts/mixins";
+
 .new-game-dialog {
     padding: 100px;
     width: 30vw;
@@ -5,17 +7,52 @@
     display: flex;  
     justify-content: center;
 
+    @include mixins.for-phone-only {
+        width: 100%;
+        padding: 0;
+        max-width: none;
+        width: 100vw;
+        height: 100vh;
+    }
+
     .new-game-dialog-inner {
         position: relative;
 
+        @include mixins.for-phone-only {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5vh;
+        }
+
         .title {
             margin-bottom: 64px;
+
+            @include mixins.for-phone-only {
+                text-align: center;
+                margin-bottom: 0;
+            }
+        }
+
+        .list-of-actions {
+            @include mixins.for-phone-only {
+                
+                li {
+                    width: 60%;
+                    margin: 0 auto;
+                }
+            }
         }
         .close-modal-button {
             position: absolute;
             top: -70px;
             right: -150px;
             margin-bottom: 32px;
+
+            @include mixins.for-phone-only {
+                display: none;
+            }
 
             img {
                 width: 20px;
@@ -33,4 +70,57 @@
 
 .inner {
     width: 100vw;
+}
+
+.close-dialog-mobile-container {
+    display: flex;
+    justify-content: center;
+}
+
+.close-dialog-mobile {
+    position: relative;
+    font-weight: bold;
+    background-color: #ff0047;
+    color: white;
+    font-size: 16px;
+    border-radius: 50%;
+    display: none;
+    padding: 16px;
+
+    img {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        z-index: 1;
+        transition: transform .3s;
+    }
+
+    @include mixins.for-phone-only {
+        display: flex;
+    }
+
+    &::after{
+        content: '';
+        background:rgba(255, 255, 255, 0.15);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        transition: transform .2s;
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    &:active {
+        &::after{
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            transform: rotate(90deg);
+        }
+    }
 }
