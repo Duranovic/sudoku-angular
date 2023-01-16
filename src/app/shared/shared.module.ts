@@ -5,10 +5,12 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { RouterModule } from '@angular/router';
 import { TimerComponent } from './components/timer/timer.component';
 import { ButtonLinkComponent } from './components/button-link/button-link.component';
+import { IconComponent } from './components/icon/icon.component';
 
 
 @NgModule({
   declarations: [    
+    IconComponent,
     ButtonComponent,
     ButtonLinkComponent,
     SpinnerComponent,
@@ -22,7 +24,8 @@ import { ButtonLinkComponent } from './components/button-link/button-link.compon
     ButtonComponent,
     ButtonLinkComponent,
     SpinnerComponent,
-    TimerComponent
+    TimerComponent,
+    IconComponent,
   ]
 })
 export class SharedModule { }
