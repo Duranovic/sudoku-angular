@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="sudoku-icon" [ngClass]="['sudoku-icon--' + size, 'sudoku-icon-color--' + color,'sudoku-icon-stroke--' + stroke , active ? 'sudoku-icon--active' : '', disableHover ? 'sudoku-icon--disable-hover' : '']" [ngStyle]="{'transform': 'rotate(' + rotate + 'deg)'}">
+  <use [attr.href]='link'/>
+</svg>
