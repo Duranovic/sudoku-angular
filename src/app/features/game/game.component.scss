@@ -4,8 +4,9 @@
 :host {
     display: flex;
     gap: 32px;
-    padding: 140px;
     align-items: center;
+    padding-inline: 5vw;
+
 
     @include mixins.for-phone-only {
         flex-direction: column;
@@ -13,6 +14,10 @@
         padding: 0;
         gap: 7vw;
         height: 100%;
+    }
+
+    @include mixins.for-big-desktop-up {
+        padding-inline: 10vw;
     }
 }
 
