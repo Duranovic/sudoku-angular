@@ -31,13 +31,9 @@
         position: absolute;
         width: 1px;
         height: 100%;
-        left: 39.8%;
+        left: var(--vertical-lines-offset);
         transform: translateX(-50%);
         background-color: colors.$white;
-
-        @include mixins.for-phone-only {
-            left: var(--vertical-lines-offset);
-        }
     }
 
     &::before {
@@ -45,16 +41,10 @@
         position: absolute;
         width: 1px;
         height: 100%;
-        right: 39.8%;
+        right: var(--vertical-lines-offset);
         transform: translateX(50%);
         background-color: colors.$white;
-
-        @include mixins.for-phone-only {
-            right: var(--vertical-lines-offset);
-        }
     }
-
-    
 }
 
 .sudoku-controls-container {
@@ -346,7 +336,7 @@
                 position: absolute;
                 width: 70%;
                 height: 1px;
-                bottom: 0;
+                bottom: -1px;
                 left: 50%;
                 transform: translateX(-50%);
                 background-color: rgba(220, 220, 220, 0.35);
