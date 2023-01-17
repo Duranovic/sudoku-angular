@@ -5,6 +5,7 @@
     display: flex;
     gap: 32px;
     padding: 140px;
+    align-items: center;
 
     @include mixins.for-phone-only {
         flex-direction: column;
@@ -15,15 +16,24 @@
     }
 }
 
-.sudoku-grid {
+.sudoku-grid-wrapper {
     flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @include mixins.for-phone-only {
+        display: block;
+        width: 100%;
+    }
+}
+.sudoku-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 
     @include mixins.for-phone-only {
-        flex: 0;
+        flex: 1;
     }
 
     &::after {
@@ -212,8 +222,8 @@
 }
 
 .box {
-    width: 55px;
-    height: 48px;
+    width: 65px;
+    height: 58px;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -240,15 +250,26 @@
         }
     }
 
+    &:nth-child(3n) {
+        &::after {
+            right: -1px;
+        }
+    }
 
     button {
         display: flex;
         justify-content: center;
         align-items: center;
         color: colors.$white;
-        font-size: 20px;
+        font-size: 22px;
         flex: 1;
         position: relative;
+
+        @include mixins.for-phone-only {
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
+        }
 
         &.active {
             .number-value {
@@ -268,13 +289,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 38px;
-            height: 38px;
+            width: 65%;
+            height: 70%;
             border-radius: 50%;
             line-height: 1;
             transition: background-color .3s;
             opacity: 1;
             z-index: 100;
+
+            @include mixins.for-phone-only {
+                width: 34px;
+                height: 34px;
+            }
 
             &:not(.computed):not(:empty) {
                 color: colors.$black;
