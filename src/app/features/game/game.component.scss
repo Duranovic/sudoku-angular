@@ -22,6 +22,10 @@
     align-items: center;
     position: relative;
 
+    @include mixins.for-phone-only {
+        flex: 0;
+    }
+
     &::after {
         content: '';
         position: absolute;
@@ -32,7 +36,7 @@
         background-color: colors.$white;
 
         @include mixins.for-phone-only {
-            left: 31%;
+            left: var(--vertical-lines-offset);
         }
     }
 
@@ -46,9 +50,11 @@
         background-color: colors.$white;
 
         @include mixins.for-phone-only {
-            right: 31%;
+            right: var(--vertical-lines-offset);
         }
     }
+
+    
 }
 
 .sudoku-controls-container {
@@ -93,7 +99,9 @@
 
         @include mixins.for-phone-only {
             max-width: 280px;
-            gap: 12px;
+            max-width: 80vw;
+            row-gap: 3vh;
+            column-gap: 10px;
         }
 
         li {
@@ -112,8 +120,10 @@
                 transition: opacity .3s ease-in-out, background-color .3s ease-in-out;
 
                 @include mixins.for-phone-only {
-                    width: 45px;
-                    height: 45px;
+                    width: 6vh;
+                    height: 6vh;
+                    min-width: 45px;
+                    min-height: 45px;
                 }
 
                 span {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,12 +6,13 @@ import { NewGameDialogComponent } from '../new-game-dialog/new-game-dialog.compo
 import { SoundService } from 'src/app/core/services/sound.service';
 import { SoundsEnum } from 'src/app/core/enums/sound.enum';
 import { SvgSize } from 'src/app/core/enums/icon.enums';
+import { NumberFormatStyle } from '@angular/common';
 
 @Component({
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, AfterViewInit {
 
   constructor(public sudokuService: SudokuService, private soundService: SoundService, public dialog: MatDialog) { }
 
@@ -28,11 +29,31 @@ export class GameComponent implements OnInit {
       this.sudokuService.getFromLocalStorage(PatchLocalStorage.Timer);
       return;
     }
-
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
   }
 
-  get SvgSize(){
+  public ngAfterViewInit(): void {
+    this.calculateWidth();
+  }
+
+  @HostListener('window:resize')
+  public calculateWidth(): void {
+    const gridElement = document.querySelector('#sudoku-grid');
+    const numberOfCellsInGrid = 9;
+    const numberOfCellsInBox = 3;
+
+    if(!gridElement)
+     return;
+
+    const gridWidth = gridElement.clientWidth;
+    const cellWidth = gridWidth / numberOfCellsInGrid;
+    const verticalLinesOffset = cellWidth * numberOfCellsInBox;
+
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--vertical-lines-offset', verticalLinesOffset.toString() + 'px');
+  }
+
+  get SvgSize() {
     return SvgSize;
   }
 
@@ -94,7 +115,6 @@ export class GameComponent implements OnInit {
     let isUndoStackChanged = this.sudokuService.puzzle.undo.stack.length > 1;
     return isUndoMovesLeft && isUndoStackChanged;
   }
-
 
   public newGame(gameOver: boolean = false): void {
     this.dialog.open(NewGameDialogComponent, {

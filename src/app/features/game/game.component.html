@@ -1,4 +1,4 @@
-<div class="sudoku-grid">
+<div class="sudoku-grid" id="sudoku-grid">
     <div *ngFor="let row of array; let i = index" class="flex"
         [ngClass]="{'active-row': i == sudokuService.puzzle.activeElementRow}">
         <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()"
