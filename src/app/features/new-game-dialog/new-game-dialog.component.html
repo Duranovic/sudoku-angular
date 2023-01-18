@@ -18,10 +18,17 @@
             </div>
         </ng-container>
         <ng-template #gameOver>
-            <h2 class="title">Game over!</h2>
-            <p>You have failed to complete the sudoku puzzle. Better luck next time. Click the "Try Again" button for a second chance or the "New Game" button to start a new puzzle.</p>
-            <sudoku-button text="One more chance!" (clicked)="secondChance()"></sudoku-button>
-            <sudoku-button text="Play new game!" (clicked)="newGame()"></sudoku-button>
+            <div class="game-over">
+                <img src="assets/images/hand-holding-heart.png" alt="TEST">
+                <div class="content">
+                    <h2 class="title">Extra life</h2>
+                    <p class="message">Don't give up! You are so lucky! <br> There is an extra life.</p>
+                </div>
+                <div class="button-container">
+                    <button (click)="secondChance()" class="btn btn--red">Take it</button>
+                    <button (click)="newGame()" class="btn btn--gray">New Game</button>
+                </div>
+            </div>
         </ng-template>
     </div>
 </div>

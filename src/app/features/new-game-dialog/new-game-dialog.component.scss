@@ -6,6 +6,7 @@
     max-width: 500px;
     display: flex;  
     justify-content: center;
+    padding: 0;
 
     @include mixins.for-phone-only {
         width: 100%;
@@ -57,6 +58,54 @@
             img {
                 width: 20px;
                 height: 20px;
+            }
+        }
+
+        .game-over {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            border-radius: 40px;
+            height: 500px;
+            width: 400px;
+            margin: 0 auto;
+
+            @include mixins.for-phone-only {
+                max-width: 90%;
+                max-height: 80%;
+            }
+
+            img {
+                width: 160px;
+                height: 160px;
+                margin: 0 auto;
+            }
+            .content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .title {
+                    text-transform: uppercase;
+                    color: black;
+                    margin: 0;
+                }
+                .message {
+                    line-height: 1.5;
+                    text-align: center;
+                    color: black;
+                }
+            }
+            .button-container {
+                display: flex;
+                gap: 16px;
+
+                .btn {
+                    flex: 1;
+                }
             }
         }
     }
