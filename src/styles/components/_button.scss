@@ -54,3 +54,24 @@
         transition:  bottom .3s ease-out, right .3s ease-out;
     }
 }
+
+
+
+.btn {
+    font-size: 14px;
+    color: white;
+    padding: 20px 24px;
+    border-radius: 16px;
+    box-shadow: 0 0 3px gainsboro;
+    font-weight: bold;
+
+    &--red {
+        background-color: #FF0661;
+    }
+
+    &--gray {
+        background-color: #F2F2F2;
+        border: 1px solid gainsboro;
+        color: black;
+    }
+}
