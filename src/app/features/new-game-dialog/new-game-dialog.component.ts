@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GameStatus } from 'src/app/core/enums/game-status';
 import { SvgSize } from 'src/app/core/enums/icon.enums';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
 import { SudokuService } from 'src/app/core/services/sudoku.service';
@@ -12,16 +13,16 @@ import { SudokuService } from 'src/app/core/services/sudoku.service';
 })
 export class NewGameDialogComponent implements OnInit {
   public game_levels!: any[];
-  public game_over: boolean = false;
+  public game_status!: GameStatus;
 
-  constructor(private dialogRef: MatDialogRef<NewGameDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { gameOver: boolean }, private sudokuService: SudokuService) { }
+  constructor(private dialogRef: MatDialogRef<NewGameDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { gameStatus: GameStatus }, private sudokuService: SudokuService) { }
 
   public ngOnInit(): void {
-    this.game_over = this.data.gameOver;
+    this.game_status = this.data.gameStatus;
     this.game_levels = [
       {
         buttonText: "Easy",
-        numberOfRemovedFields: 16,
+        numberOfRemovedFields: 2,
       },
       {
         buttonText: "Normal",
@@ -38,7 +39,11 @@ export class NewGameDialogComponent implements OnInit {
     ]
   }
 
-  get SvgSize(){
+  public get GameStatus() {
+    return GameStatus;
+  }
+
+  public get SvgSize(){
     return SvgSize;
   }
 
@@ -51,7 +56,7 @@ export class NewGameDialogComponent implements OnInit {
   }
 
   public newGame() {
-    this.game_over = false;
+    this.game_status = GameStatus.NEW_GAME;
     this.dialogRef.disableClose = false;
   }
 

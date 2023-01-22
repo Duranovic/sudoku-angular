@@ -1,6 +1,6 @@
 <div class="new-game-dialog">
     <div class="new-game-dialog-inner">
-        <ng-container *ngIf="!game_over; else gameOver">
+        <ng-container *ngIf="game_status === GameStatus.NEW_GAME; else gameOver">
             <button mat-dialog-close class="close-modal-button"> 
                 <sudoku-icon name="icon-cross" color="white" [size]="SvgSize.small"></sudoku-icon>
             </button>
@@ -18,15 +18,30 @@
             </div>
         </ng-container>
         <ng-template #gameOver>
-            <div class="game-over">
-                <img src="assets/images/hand-holding-heart.png" alt="TEST">
+            <ng-container *ngIf="game_status === GameStatus.GAME_OVER; else win">
+                <div class="white-dialog game-over">
+                    <img src="assets/images/hand-holding-heart.png" alt="TEST">
+                    <div class="content">
+                        <h2 class="title">Extra life</h2>
+                        <p class="message">Don't give up! You are so lucky! <br> There is an extra life.</p>
+                    </div>
+                    <div class="button-container">
+                        <button (click)="secondChance()" class="btn btn--red">Take it</button>
+                        <button (click)="newGame()" class="btn btn--gray">New Game</button>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-template>
+        <ng-template #win>
+            <div class="white-dialog win">
+                <img src="assets/images/trophy-darker.png" alt="Trophy">
                 <div class="content">
-                    <h2 class="title">Extra life</h2>
-                    <p class="message">Don't give up! You are so lucky! <br> There is an extra life.</p>
+                    <h2 class="title title--win">Congradulations!!</h2>
+                    <h3 class="subtitle">You have completed the puzzle!</h3>
+                    <p class="message"> Try it once more on a harder level and become master of sudoku.</p>
                 </div>
                 <div class="button-container">
-                    <button (click)="secondChance()" class="btn btn--red">Take it</button>
-                    <button (click)="newGame()" class="btn btn--gray">New Game</button>
+                    <button (click)="newGame()" class="btn btn--gray">New game</button>
                 </div>
             </div>
         </ng-template>

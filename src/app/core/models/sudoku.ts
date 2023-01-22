@@ -139,8 +139,8 @@ export class Sudoku {
         };
         this.gameplay_puzzle.next(current_gameplay);
         this.updateUndoStack();
-        
-        if(!valid) {
+
+        if (!valid) {
             this.mistakes++;
         }
     }
@@ -213,5 +213,14 @@ export class Sudoku {
 
     public isGameOver(): boolean {
         return this.mistakes === 3;
+    }
+
+    public isPuzzleCompleted(): boolean {
+        let i, j;
+        for (i = 0; i < 9; i++)
+            for (j = 0; j < 9; j++)
+                if (this.puzzle[i][j].value != this.gameplay_puzzle.value[i][j].value)
+                    return false;
+        return true;
     }
 }

@@ -7,6 +7,7 @@ import { SoundService } from 'src/app/core/services/sound.service';
 import { SoundsEnum } from 'src/app/core/enums/sound.enum';
 import { SvgSize } from 'src/app/core/enums/icon.enums';
 import { NumberFormatStyle } from '@angular/common';
+import { GameStatus } from 'src/app/core/enums/game-status';
 
 @Component({
   templateUrl: './game.component.html',
@@ -53,6 +54,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     root.style.setProperty('--vertical-lines-offset', verticalLinesOffset.toString() + 'px');
   }
 
+  get GameStatus() {
+    return GameStatus;
+  }
+
   get SvgSize() {
     return SvgSize;
   }
@@ -83,7 +88,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
     if(this.sudokuService.puzzle.isGameOver()) {
       this.soundService.playSound(SoundsEnum.GAME_OVER);
-      this.newGame(true);
+      this.openDialog(GameStatus.GAME_OVER);
+    } else if(this.sudokuService.puzzle.isPuzzleCompleted()) {
+      this.openDialog(GameStatus.COMPLETED);
     }
   }
 
@@ -116,11 +123,11 @@ export class GameComponent implements OnInit, AfterViewInit {
     return isUndoMovesLeft && isUndoStackChanged;
   }
 
-  public newGame(gameOver: boolean = false): void {
+  public openDialog(gameStatus: GameStatus): void {
     this.dialog.open(NewGameDialogComponent, {
-      disableClose: gameOver,
+      disableClose: gameStatus === GameStatus.GAME_OVER,
       data: {
-        gameOver,
+        gameStatus,
       }
     });
   }

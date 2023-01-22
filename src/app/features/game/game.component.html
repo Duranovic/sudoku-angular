@@ -52,7 +52,7 @@
             </button>
         </li>
         <li class="new-game-list-item">
-            <button class="new-game-btn" (click)="newGame()">
+            <button class="new-game-btn" (click)="openDialog(GameStatus.NEW_GAME)">
                  <sudoku-icon name="icon-cross" color="grey" [size]="SvgSize.extraSmall" [rotate]=45></sudoku-icon>
             </button>
         </li>
@@ -70,5 +70,5 @@
             </button>
         </li>
     </ul>
-    <sudoku-button class="new-game-btn-desktop" text="New game" (clicked)="newGame()"></sudoku-button>
+    <sudoku-button class="new-game-btn-desktop" text="New game" (clicked)="openDialog(GameStatus.NEW_GAME)"></sudoku-button>
 </div>
