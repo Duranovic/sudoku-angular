@@ -43,8 +43,8 @@ export class GameComponent implements OnInit, AfterViewInit {
     const numberOfCellsInGrid = 9;
     const numberOfCellsInBox = 3;
 
-    if(!gridElement)
-     return;
+    if (!gridElement)
+      return;
 
     const gridWidth = gridElement.clientWidth;
     const cellWidth = gridWidth / numberOfCellsInGrid;
@@ -86,10 +86,11 @@ export class GameComponent implements OnInit, AfterViewInit {
     isMoveRight ? this.soundService.playSound(SoundsEnum.RIGHT_MOVE) : this.soundService.playSound(SoundsEnum.WRONG_MOVE);
 
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
-    if(this.sudokuService.puzzle.isGameOver()) {
+    if (this.sudokuService.puzzle.isGameOver()) {
       this.soundService.playSound(SoundsEnum.GAME_OVER);
       this.openDialog(GameStatus.GAME_OVER);
-    } else if(this.sudokuService.puzzle.isPuzzleCompleted()) {
+    } else if (this.sudokuService.puzzle.isPuzzleCompleted()) {
+      this.soundService.playSound(SoundsEnum.COMPLETED);
       this.openDialog(GameStatus.COMPLETED);
     }
   }
