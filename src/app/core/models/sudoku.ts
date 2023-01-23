@@ -33,7 +33,7 @@ export class Sudoku {
         this.undo.stack.push(cloneMatrix(this.challenge_puzzle));
     }
 
-    private fillPuzzle = (row: number, col: number): boolean => {
+    private fillPuzzle(row: number, col: number): boolean {
         // if we've reached the last cell, the puzzle is complete
         if (row === 9) {
             return true;
@@ -47,7 +47,6 @@ export class Sudoku {
                 return this.fillPuzzle(row, col + 1);
             }
         }
-
         // shuffle the array of possible numbers
         let numbers = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
@@ -110,7 +109,7 @@ export class Sudoku {
         return true;
     }
 
-    private removeCells(numToRemove: number) {
+    private removeCells(numToRemove: number): void {
         this.challenge_puzzle = cloneMatrix(this.puzzle);
 
         let removed: number[][] = [];
@@ -175,7 +174,7 @@ export class Sudoku {
         this.mistakes = state.mistakes;
     }
 
-    public updateUndoStack() {
+    public updateUndoStack(): void {
         if (this.undo.stack.length === 6) {
             this.undo.stack.shift();
         }
@@ -183,7 +182,7 @@ export class Sudoku {
         this.undo.stack.push(cloneMatrix(this.gameplay_puzzle.getValue()));
     }
 
-    public undoPlay() {
+    public undoPlay(): void {
         let stack_length = this.undo.stack.length;
         if (stack_length === 1)
             return;

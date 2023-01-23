@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { game_levels } from 'src/app/core/constants/sudoku.constant';
 import { GameStatus } from 'src/app/core/enums/game-status';
 import { SvgSize } from 'src/app/core/enums/icon.enums';
 import { PatchLocalStorage } from 'src/app/core/enums/sudoku-patch-local-storage.enum';
@@ -12,31 +13,16 @@ import { SudokuService } from 'src/app/core/services/sudoku.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewGameDialogComponent implements OnInit {
-  public game_levels!: any[];
   public game_status!: GameStatus;
 
   constructor(private dialogRef: MatDialogRef<NewGameDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { gameStatus: GameStatus }, private sudokuService: SudokuService) { }
 
   public ngOnInit(): void {
     this.game_status = this.data.gameStatus;
-    this.game_levels = [
-      {
-        buttonText: "Easy",
-        numberOfRemovedFields: 2,
-      },
-      {
-        buttonText: "Normal",
-        numberOfRemovedFields: 25,
-      },
-      {
-        buttonText: "Hard",
-        numberOfRemovedFields: 40,
-      },
-      {
-        buttonText: "Expert",
-        numberOfRemovedFields: 60,
-      },
-    ]
+  }
+
+  public get GameLevels() {
+    return game_levels;
   }
 
   public get GameStatus() {

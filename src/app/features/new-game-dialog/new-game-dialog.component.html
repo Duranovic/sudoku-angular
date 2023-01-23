@@ -7,7 +7,7 @@
             
             <h2 class="title">Choose Dificulty</h2>
             <ul class="list-of-actions">
-                <li *ngFor="let item of game_levels">
+                <li *ngFor="let item of GameLevels">
                     <sudoku-button [text]="item.buttonText" (clicked)="createNewGame(item.numberOfRemovedFields)"></sudoku-button>
                 </li>
             </ul>
