@@ -6,6 +6,8 @@ The only thing left that is not finished is Notes feature, but it will be finish
 If you have any suggestion, create an issue and will take a look 😉
 I have to add few things on design to not look monotone and blue 😅
 
+Preview URL: https://sudoku-velc.web.app/
+
 Screenshots: 
 ## Landing page
 ![image](https://user-images.githubusercontent.com/32494609/231204673-309c5d81-d76f-4e0a-b1ce-26cc23767c15.png)
