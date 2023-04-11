@@ -1,6 +1,21 @@
-# SudokuWeb
+# Sudoku Velc
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+This is a passion project of mine. Design is done by me and although the project is not finished yet, it looks pretty to me and I enjoy playing sudoku more than ever.
+There is Adaptive design applied to this project which mean it looks great on mobile as well with some minor adaptation of layout.
+The only thing left that is not finished is Notes feature, but it will be finished soon. 
+If you have any suggestion, create an issue and will take a look 😉
+I have to add few things on design to not look monotone and blue 😅
+
+Screenshots: 
+## Landing page
+![image](https://user-images.githubusercontent.com/32494609/231204673-309c5d81-d76f-4e0a-b1ce-26cc23767c15.png)
+## Game page
+![image](https://user-images.githubusercontent.com/32494609/231204910-3903b14c-4979-4cf2-b381-75f3b76f982f.png)
+## Game over / Extra life
+![image](https://user-images.githubusercontent.com/32494609/231205049-39c93b53-4cd1-4f03-8f66-f1e505014320.png)
+## New game
+![image](https://user-images.githubusercontent.com/32494609/231205220-e817c42a-4ee2-43ff-8bac-0ec11e61a0f6.png)
+
 
 ## Development server
 
