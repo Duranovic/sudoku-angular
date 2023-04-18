@@ -10,13 +10,11 @@ Preview URL: https://sudoku-velc.web.app/
 
 Screenshots: 
 ## Landing page
-![image](https://user-images.githubusercontent.com/32494609/231204673-309c5d81-d76f-4e0a-b1ce-26cc23767c15.png)
+![Web 1920 – 12](https://user-images.githubusercontent.com/32494609/232644250-4662deda-340e-40fb-97a5-8e6a922302df.png)
 ## Game page
-![image](https://user-images.githubusercontent.com/32494609/231204910-3903b14c-4979-4cf2-b381-75f3b76f982f.png)
-## Game over / Extra life
-![image](https://user-images.githubusercontent.com/32494609/231205049-39c93b53-4cd1-4f03-8f66-f1e505014320.png)
+![Web 1920 – 10](https://user-images.githubusercontent.com/32494609/232644314-08f40cc1-0f7c-4460-9e0d-e07a1a001f89.jpg)
 ## New game
-![image](https://user-images.githubusercontent.com/32494609/231205220-e817c42a-4ee2-43ff-8bac-0ec11e61a0f6.png)
+![Web 1920 – 11](https://user-images.githubusercontent.com/32494609/232644355-e947c4d9-bdfa-423e-9653-7575b4b9ed50.jpg)
 
 
 ## Development server
