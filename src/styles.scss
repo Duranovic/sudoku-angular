@@ -38,7 +38,21 @@ $sudoku-web-theme: mat.define-light-theme((
 
 body{
     height: 100vh;
-    background: linear-gradient(to right, #1A46DD, #002991);
     margin: 0;
+    background: linear-gradient(135deg, #1A46DD, #002991, #1A46DD); 
+    background-size: 400% 400%; 
+    animation: gradientAnimation 15s ease infinite; // Reduced animation duration
+    
+    @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
 }
 html, body { height: 100%; }
