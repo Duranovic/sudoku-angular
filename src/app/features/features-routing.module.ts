@@ -4,8 +4,8 @@ import { GameComponent } from './game/game.component';
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  {path: '', component: LandingComponent},
-  {path: 'game', component: GameComponent},
+  {path: '', component: LandingComponent, data: {animation: 'HomePage'}},
+  {path: 'game', component: GameComponent, data: {animation: 'GamePage'}},
   {path: '**', redirectTo: ''},
 ];
 

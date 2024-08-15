@@ -1,6 +1,6 @@
 <main>
   <sudoku-header></sudoku-header>
-  <div class="router-component-wrapper">
-    <router-outlet></router-outlet>
+  <div class="router-component-wrapper"  [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </main>
