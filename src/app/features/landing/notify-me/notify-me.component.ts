@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from 'src/app/core/services/email.service';
 
 @Component({
   selector: 'sudoku-notify-me',
@@ -8,7 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class NotifyMeComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private emailService: EmailService) { }
 
   public form!: FormGroup;
   public loading: boolean = false;
@@ -38,5 +39,6 @@ export class NotifyMeComponent implements OnInit {
       this.loading = false;
       this.success = true;     
     }, 2000);
+    this.emailService.sendEmail(this.email).subscribe(x=>console.log(x));
   }
 }
