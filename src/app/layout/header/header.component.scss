@@ -119,18 +119,18 @@ header {
             gap: 10px;
             cursor: pointer;
             border: none;
-            color: ghostwhite;
+            color: var(--text-default);
             text-transform: capitalize;
 
             .color-circle {
                 display: block;
-                background-color: colors.$white;
+                background-color: var(--background-default);
                 border: none;
                 border-radius: 50%;
                 width: 25px;
                 height: 25px;
                 transition: background-color 0.3s, transform 0.3s;
-                border: 2px solid aliceblue;
+                border: 1px solid var(--text-default);
 
                 &:hover {
                     transform: translateY(-2px);
@@ -140,22 +140,22 @@ header {
 
             &.light {
                 .color-circle {
-                    background-color: colors.$white;                
+                    background-color: #fff;                
                 }
             }
             &.dark {
                 .color-circle {
-                    background-color: colors.$black;
+                    background-color: #111111;
                 }
             }
             &.blue {
                 .color-circle {
-                    background-color: colors.$blue;
+                    background-color: #1A46DD;
                 }
             }
             &.silver {
                 .color-circle {
-                    background-color: colors.$blue--dark;
+                    background-color: #d8e4ef;
                 }
             }
         }

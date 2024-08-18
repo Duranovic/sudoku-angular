@@ -1,0 +1,68 @@
+
+:root, [data-theme="blue"] {
+    /* Colors */ 
+    --background-default: #1A46DD;
+    --background-secondary: #002991;
+    --background-tertiary: #4e6ac7;
+    
+    --text-default: #fff;
+    --text-secondary: #000;
+
+    --button-default: #fff;
+    --button-default-text: #fff;
+    --button-default-hover: rgba(255, 255, 255, 0.45);
+    --button-secondary: #002991;
+    --button-secondary-hover: #002991af;
+  }
+
+  [data-theme="silver"] {
+    --background-default: #fff;
+    --background-secondary: #d8e4ef;
+    --background-tertiary: #4e6ac7;
+
+    --text-default: #000;
+    --text-secondary: #fff;
+    
+    --button-default: #4e6ac7;
+    --button-default-text: #fff;
+    --button-default-hover: rgba(78, 106, 199, 0.45);
+    --button-secondary: #1A46DD;
+    --button-secondary-hover: #002991af;
+  }
+
+  [data-theme="light"] {
+    --background-default: #fff;
+    --button-default-text: #fff;
+    --background-secondary: #efefef;
+    --background-tertiary: rgba(40, 167, 70, 0.45);
+
+    --text-default: #000;
+    --text-secondary: #fff;
+
+    /*
+        #007bff (Royal Blue)
+        #28a745 (Emerald Green)
+        #ff7f50 (Coral)
+        #40e0d0 (Turquoise)
+        #6a0dad (Purple)
+    */
+    --button-default:  #28a745;
+    --button-default-text: #fff;
+    --button-default-hover: rgba(40, 167, 70, 0.45);
+    --button-secondary: #1e8a37;
+    --button-secondary-hover: #1e8a37c3;
+  }
+  [data-theme="dark"] {
+    --background-default: #000000;
+    --background-secondary: #111111;
+    --background-tertiary: #3d3d3d;
+
+    --text-default: #fff;
+    --text-secondary: #000;
+
+    --button-default: #fff;
+    --button-default-text: #fff;
+    --button-default-hover: rgba(255, 255, 255, 0.45);
+    --button-secondary: #fff;
+    --button-secondary-hover: #dfdfdf;
+  }

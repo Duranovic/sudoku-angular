@@ -8,7 +8,7 @@ export class ThemeService {
     private themes = ['light', 'dark', 'blue', 'silver'];
 
     constructor() {
-        this.currentTheme = 'light'; // Default theme
+        this.currentTheme = 'blue'; // Default theme
     }
 
     public setTheme(theme: string): void {

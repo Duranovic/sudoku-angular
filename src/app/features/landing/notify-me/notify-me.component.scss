@@ -83,7 +83,7 @@
 
     .velc-input {
       position: relative;
-      background-color: #4e6ac7;
+      background-color: var(--background-tertiary);
       border-bottom-left-radius: 4px;
       border-top-left-radius: 4px;
       border-top-right-radius: 16px;
@@ -105,7 +105,7 @@
         border: none;
         background-color: transparent;
         flex-grow: 1;
-        color: colors.$white;
+        color: var(--button-default-text);
         transition: opacity 0.3s;
 
         @include mixins.for-big-desktop-up {
@@ -117,15 +117,15 @@
         }
 
         &::placeholder {
-          color: rgba(256, 256, 257, 0.73);
+          color: var(--button-default-text);
         }
       }
 
       button {
         cursor: pointer;
         font-weight: bold;
-        background-color: colors.$blue--dark;
-        color: white;
+        background-color: var(--button-secondary);
+        color: var(--button-default-text);
         padding: 20px 22px;
         border-radius: 16px;
         border: none;
@@ -150,11 +150,12 @@
            }
 
         span {
+          color: inherit;
           transition: opacity 0.3s 0.8s ease-in-out, font-weight 0.1s 0.5s;
         }
 
         &:hover {
-          background-color: transparentize($color: colors.$blue--dark, $amount: 0.2);
+          background-color: var(--button-secondary-hover);
         }
       }
 
