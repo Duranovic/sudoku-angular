@@ -4,6 +4,7 @@
 header {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     &.isGame {
         @include mixins.for-phone-only {
@@ -75,5 +76,99 @@ header {
         img {
             width: 16px;
         }
+    }
+
+    .themes {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+        position: absolute;
+        right: 64px;
+
+        .other-themes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: absolute;
+            left: 0;
+            top: 36px;
+
+
+            .theme-item {
+                opacity: 0;
+                // add delay to each item for staggered animation
+                
+                &:nth-child(2) {
+                    animation-delay: 0.1s;
+                }
+                &:nth-child(3) {
+                    animation-delay: 0.2s;
+                }
+                &:nth-child(4) {
+                    animation-delay: 0.3s;
+                }
+                animation: fadeInSlideUp 0.2s ease-in-out forwards;
+            }
+        }
+
+        .theme-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            color: ghostwhite;
+            text-transform: capitalize;
+
+            .color-circle {
+                display: block;
+                background-color: colors.$white;
+                border: none;
+                border-radius: 50%;
+                width: 25px;
+                height: 25px;
+                transition: background-color 0.3s, transform 0.3s;
+                border: 2px solid aliceblue;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+            }
+            
+
+            &.light {
+                .color-circle {
+                    background-color: colors.$white;                
+                }
+            }
+            &.dark {
+                .color-circle {
+                    background-color: colors.$black;
+                }
+            }
+            &.blue {
+                .color-circle {
+                    background-color: colors.$blue;
+                }
+            }
+            &.silver {
+                .color-circle {
+                    background-color: colors.$blue--dark;
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

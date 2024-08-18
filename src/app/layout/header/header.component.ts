@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { enterFullScreenConst, exitFullScreenConst } from 'src/app/core/constants/header.constant';
 import { Router, NavigationEnd } from '@angular/router';
 import { images_folder_path } from 'src/environments/environment';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'sudoku-header',
@@ -13,8 +14,9 @@ export class HeaderComponent implements OnInit {
   public fullScreenIconPath?: string;
   public fullScreen?: any;
   public isGame?: boolean;
+  public showThemesDropdown = false;
   
-  constructor(private router:  Router, private ch: ChangeDetectorRef) { }
+  constructor(private router:  Router, private ch: ChangeDetectorRef, public themeService: ThemeService) { }
 
   public ngOnInit(): void {
     this.router.events.subscribe((event) => (event instanceof NavigationEnd) && this.handleRouteChange());
@@ -39,5 +41,22 @@ export class HeaderComponent implements OnInit {
       document.exitFullscreen();
       this.fullScreen = enterFullScreenConst;
     }
+  }
+
+  public changeTheme(theme: string): void {
+    this.themeService.setTheme(theme);
+    this.showThemesDropdown = false;
+  }
+
+  public toggleThemes(): void {
+    this.showThemesDropdown = !this.showThemesDropdown;
+  }
+
+  public get otherThemes(): string[] {
+    return this.themeService.getOtherThemes();
+  }
+
+  public get currentTheme(): string {
+    return this.themeService.getCurrentTheme();
   }
 }

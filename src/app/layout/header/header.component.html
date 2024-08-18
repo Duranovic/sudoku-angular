@@ -6,5 +6,18 @@
         <img [src]="fullScreen.imagePath">
         {{ fullScreen.text }}
     </button>
+
+    <div class="themes">
+        <button class="theme-item" id="currently-selected-theme" (click)="toggleThemes()" [ngClass]="currentTheme">
+            <span class="color-circle"></span>
+            {{ currentTheme }}
+        </button>
+        <div class="other-themes" *ngIf="showThemesDropdown">
+            <button class="theme-item" *ngFor="let theme of otherThemes" (click)="changeTheme(theme)" [ngClass]="theme">
+            <span class="color-circle"></span>
+            {{theme}}
+            </button>
+        </div>        
+    </div>
 </header>
    
