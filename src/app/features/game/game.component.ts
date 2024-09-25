@@ -77,7 +77,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     let row = this.sudokuService.puzzle.activeElementRow;
     let column = this.sudokuService.puzzle.activeElementColumn;
 
-    if (this.sudoku_puzzle[row][column].computed || this.sudoku_puzzle[row][column].value === number) {
+    if (this.sudoku_puzzle[row][column].computed || this.sudoku_puzzle[row][column].value === number && !this.sudokuService.puzzle.isNotesActive) {
       this.soundService.playSound(SoundsEnum.INTERACT);
       return;
     }
@@ -118,6 +118,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
   }
 
+  public toggleNotesStatus() {
+    this.sudokuService.puzzle.toggleIsNotesActive();
+  }
+
   public isUndoEnabled(): boolean {
     let isUndoMovesLeft = this.sudokuService.puzzle.undo.available_moves > 0;
     let isUndoStackChanged = this.sudokuService.puzzle.undo.stack.length > 1;
@@ -132,4 +136,16 @@ export class GameComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  public getNotes(row: number, column: number) {    
+    return Object.entries(this.sudoku_puzzle[row][column]?.notes ?? []).map(([key, value]) => ({ key, value }));
+  }
+
+  public identify(index: number, item: any){
+    return index; 
+ }
+
+ public shouldShowNotesList(row: number, column: number): boolean {
+    return Object.entries(this.sudoku_puzzle[row][column]?.notes ?? {})?.some(([key, value]) => value === true);
+ }
 }

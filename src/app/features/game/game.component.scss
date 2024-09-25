@@ -221,6 +221,27 @@
                     pointer-events: none;
                     cursor: default;
                 }
+
+                .notes-indicator {
+                    position: absolute;
+                    top: -15px;
+                    right: -22px;
+                    background-color: colors.$white;
+                    padding: 5px 4px;
+                    border-radius: 50%;
+                    color: colors.$black;
+                    font-size: 10px;
+                    font-weight: bold;
+                    pointer-events: none;
+                    letter-spacing: 0;
+                    cursor: default;
+                    transition: opacity .3s;
+
+                    &.off {
+                        opacity: 0.5;
+                        padding: 5px 2px;
+                    }
+                }
             }
         }
     }
@@ -281,11 +302,22 @@
                 position: relative;
                 z-index: 100;
                 background-color: colors.$white;
-                color: colors.$black;
+                color: colors.$black;                
 
-                &:not(.computed):not(:empty) {
+                &:not(.computed):has(.pure-value) {
                     color: colors.$black;
                     background-color: colors.$white;
+                }
+
+                &:not(.computed):has(.notes-list) {
+                    color: colors.$white;
+                }
+
+                &.notes {
+                    width: 85%;
+                    height: 85%;
+                    border-radius: 4px;
+                    background-color: transparentize($color: colors.$white, $amount: 0.3); 
                 }
             }
         }
@@ -294,11 +326,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 65%;
-            height: 70%;
+            width: 70%;
+            height: 75%;
             border-radius: 50%;
             line-height: 1;
-            transition: background-color .3s;
+            transition: background-color .3s, border-radius .3s, width .3s, height .3s;
             opacity: 1;
             z-index: 100;
 
@@ -307,7 +339,7 @@
                 height: 34px;
             }
 
-            &:not(.computed):not(:empty) {
+            &:not(.computed):has(.pure-value) {
                 color: colors.$black;
                 background-color: #B6C2E8;
             }
@@ -315,6 +347,28 @@
             &.invalid:not(.computed):not(:empty) {
                 background-color: rgb(222, 69, 69);
                 color: white;
+            }
+        }
+
+        .notes-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 36px;
+            height: 36px;
+        }
+
+        .note-number{
+            font-size: 10px;
+            width: 12px;
+            height: 12px;
+            color: colors.$white;
+            transition: color .3s;
+        }
+
+        &.active {
+            .note-number{
+                color: colors.$black;
             }
         }
 

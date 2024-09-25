@@ -7,8 +7,20 @@
                 <button (click)="onClick($event); $event.stopPropagation()"
                     [ngClass]="{'active': i == sudokuService.puzzle.activeElementRow && j == sudokuService.puzzle.activeElementColumn}">
                     <span class="number-value"
-                        [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid}">{{
-                        sudoku_puzzle[i][j]?.value }}</span>
+                        [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid, 'notes': sudokuService.puzzle.isNotesActive}">
+                        <ng-container *ngIf="!sudoku_puzzle[i][j]?.value && !sudoku_puzzle[i][j]?.computed; else value;">
+                            <div class="notes-list" *ngIf="shouldShowNotesList(i, j)">
+                                <div *ngFor="let item of getNotes(i, j); trackBy: identify" class="note-number">
+                                    {{item.value ? item.key : ""}}
+                                </div>
+                            </div>                            
+                        </ng-container>
+                        <ng-template #value>
+                            <div class="pure-value">
+                                {{sudoku_puzzle[i][j]?.value }}
+                            </div>
+                        </ng-template>
+                    </span>
                     <span class="pattern"
                         [ngClass]="{'show': i == sudokuService.puzzle.activeElementRow || j == sudokuService.puzzle.activeElementColumn}"></span>
                 </button>
@@ -56,10 +68,14 @@
                  <sudoku-icon name="icon-cross" color="grey" [size]="SvgSize.extraSmall" [rotate]=45></sudoku-icon>
             </button>
         </li>
-        <li>
-            <button>
+        <li class="notes-item">
+            <button (click)="toggleNotesStatus()">
                 <img src="assets/images/notes-icon.svg" alt="Take a note">
                 <span class="label">Notes</span>
+                <span class="notes-indicator" [class.off]="sudokuService.puzzle.isNotesActive === false">
+                    <ng-container *ngIf="sudokuService.puzzle.isNotesActive; else notesNotActive;">ON</ng-container>
+                    <ng-template #notesNotActive>OFF</ng-template>
+                </span>
             </button>
         </li>
         <li>

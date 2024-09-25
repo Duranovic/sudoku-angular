@@ -11,6 +11,7 @@ export class Sudoku {
     mistakes!: number;
     activeElementRow!: number;
     activeElementColumn!: number;
+    isNotesActive!: boolean;
 
     constructor() {
         this.gameplay_puzzle = new BehaviorSubject(cloneMatrix(sudokuInitialPuzzle));
@@ -19,6 +20,7 @@ export class Sudoku {
 
     public generateSudoku(numberOfCellsToRemove: number) {
         this.mistakes = 0;
+        this.isNotesActive = false;
         this.puzzle = cloneMatrix(sudokuInitialPuzzle);
         this.undo = {
             stack: [],
@@ -56,7 +58,7 @@ export class Sudoku {
                 this.puzzle[row][col] = {
                     computed: true,
                     value: numbers[i],
-                    valid: true,
+                    valid: true,                    
                 };
 
                 // if the next cell can be filled in, the puzzle is complete
@@ -124,29 +126,55 @@ export class Sudoku {
                     value: undefined,
                     computed: false,
                     valid: true,
+                    notes: {
+                        1: false,
+                        2: false,
+                        3: false,
+                        4: false,
+                        5: false,
+                        6: false,
+                        7: false,
+                        8: false,
+                        9: false,
+                    }
                 };
             }
         }
     }
 
     public patchCell(row: number, column: number, value: number | undefined, valid: boolean): void {
+        debugger;
         let current_gameplay = this.gameplay_puzzle.getValue();
-        current_gameplay[row][column] = {
-            computed: false,
-            value,
-            valid
-        };
+        if(this.isNotesActive) {
+            current_gameplay[row][column] = {
+                ...current_gameplay[row][column],
+                value: undefined,
+                valid: true,
+                notes: {
+                    ...current_gameplay[row][column].notes,
+                    [value as unknown as string]: (value && true===current_gameplay[row][column]?.notes[value]) ? false : true
+                }
+            };
+        } else {
+            current_gameplay[row][column] = {
+                computed: false,
+                value,
+                valid,
+                notes: value===undefined ? {} : current_gameplay[row][column]?.notes
+            };
+            if (!valid) {
+                this.mistakes++;
+            }
+        }
+
         this.gameplay_puzzle.next(current_gameplay);
         this.updateUndoStack();
-
-        if (!valid) {
-            this.mistakes++;
-        }
     }
 
     public restartSudoku(): void {
         this.gameplay_puzzle.next(cloneMatrix(this.challenge_puzzle));
         this.mistakes = 0;
+        this.isNotesActive = false;
         this.undo = {
             stack: [cloneMatrix(this.challenge_puzzle)],
             available_moves: undo_available_moves,
@@ -164,6 +192,10 @@ export class Sudoku {
     public resetActiveFields(): void {
         this.activeElementColumn = -1;
         this.activeElementRow = -1;
+    }
+
+    public toggleIsNotesActive(): void {
+        this.isNotesActive = !this.isNotesActive;
     }
 
     public patchProps(state: any): void {
