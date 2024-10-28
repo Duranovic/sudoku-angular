@@ -8,17 +8,24 @@ import { SoundsEnum } from 'src/app/core/enums/sound.enum';
 import { SvgSize } from 'src/app/core/enums/icon.enums';
 import { NumberFormatStyle } from '@angular/common';
 import { GameStatus } from 'src/app/core/enums/game-status';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit, AfterViewInit {
+export class GameComponent implements OnInit, AfterViewInit {  
 
-  constructor(public sudokuService: SudokuService, private soundService: SoundService, public dialog: MatDialog) { }
+  constructor(public sudokuService: SudokuService, private soundService: SoundService, public dialog: MatDialog, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      this.newGame = navigation.extras.state['newGame'];
+    }
+  }
 
   public array = [...Array(9).keys()];
   public sudoku_puzzle?: any;
+  public newGame: boolean = true;
 
   public ngOnInit(): void {
     this.sudokuService.puzzle.gameplay_puzzle.subscribe(x => {
@@ -26,7 +33,13 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.sudokuService.timer.startTimer();
     })
 
-    if (this.sudokuService.getFromLocalStorage(PatchLocalStorage.Puzzle)) {
+
+    if(this.newGame) {
+      this.openDialog(GameStatus.NEW_GAME);
+    }
+
+    if (!this.newGame && this.sudokuService.hasGameInLocalStorage()) {
+      this.sudokuService.getFromLocalStorage(PatchLocalStorage.Puzzle);
       this.sudokuService.getFromLocalStorage(PatchLocalStorage.Timer);
       return;
     }

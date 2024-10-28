@@ -1,5 +1,5 @@
 <div class="sudoku-grid-wrapper">
-    <div class="sudoku-grid" id="sudoku-grid">
+    <div class="sudoku-grid" id="sudoku-grid" *ngIf="sudoku_puzzle">
         <div *ngFor="let row of array; let i = index" class="flex"
             [ngClass]="{'active-row': i == sudokuService.puzzle.activeElementRow}">
             <div *ngFor="let column of array; let j = index;" class="box" [attr.id]="i.toString() + j.toString()"
@@ -7,7 +7,7 @@
                 <button (click)="onClick($event); $event.stopPropagation()"
                     [ngClass]="{'active': i == sudokuService.puzzle.activeElementRow && j == sudokuService.puzzle.activeElementColumn}">
                     <span class="number-value"
-                        [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid, 'notes': sudokuService.puzzle.isNotesActive}">
+                        [ngClass]="{'computed': sudoku_puzzle[i][j]?.computed, 'invalid': !sudoku_puzzle[i][j]?.valid, 'notes': sudokuService.puzzle?.isNotesActive}">
                         <ng-container *ngIf="!sudoku_puzzle[i][j]?.value && !sudoku_puzzle[i][j]?.computed; else value;">
                             <div class="notes-list" *ngIf="shouldShowNotesList(i, j)">
                                 <div *ngFor="let item of getNotes(i, j); trackBy: identify" class="note-number">

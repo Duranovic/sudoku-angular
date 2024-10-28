@@ -1,7 +1,8 @@
 <div class="content">
     <h1>Play Sudoku Online. <br /> Free. Now.</h1>
     <p>Playing sudoku online is better than on paper! Improve your concentration and brain power!</p>    
-    <sudoku-button-link text="Play Now" route="/game"></sudoku-button-link>
+    <sudoku-button text="Play Now" (click)="playGame(true)"></sudoku-button>
+    <button class="continue-button" (click)="playGame(false)">Continue previous game </button>
 </div>
 <!-- <sudoku-available-now></sudoku-available-now> -->
 <sudoku-notify-me></sudoku-notify-me>

@@ -37,7 +37,7 @@ export class NewGameDialogComponent implements OnInit {
     this.sudokuService.puzzle.generateSudoku(numberOfRemovedFields);
     this.sudokuService.puzzle.resetActiveFields();
     this.sudokuService.setLocalStorage(PatchLocalStorage.Puzzle);
-    this.sudokuService.timer.resetTime();
+    this.sudokuService?.timer?.resetTime();
     this.dialogRef.close();
   }
 

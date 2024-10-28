@@ -17,7 +17,7 @@ export class TimerComponent implements OnInit{
   constructor(private sudokuService: SudokuService) { }
 
   public ngOnInit(): void {
-    this.timer$ = this.sudokuService.timer.timer$.pipe(
+    this.timer$ = this.sudokuService?.timer?.timer$?.pipe(
       tap(() => { 
         this.sudokuService.setLocalStorage(this.sudokuService.timer.prepareForEncode());
       })

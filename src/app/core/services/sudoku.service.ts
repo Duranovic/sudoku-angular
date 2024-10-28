@@ -50,4 +50,9 @@ export class SudokuService {
     }
     return true;
   }
+
+  public hasGameInLocalStorage(): boolean {
+    let storage_item = localStorage.getItem(latest_sudoku_game);
+    return !!storage_item;
+  }
 }

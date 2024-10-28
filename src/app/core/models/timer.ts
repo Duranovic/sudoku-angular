@@ -27,7 +27,7 @@ export class Timer {
         this.hours = 0;
         this.minutes = 0;
         this.seconds = 0;
-        this.timer$.next(this.getTimerStringFormat());
+        this.timer$?.next(this.getTimerStringFormat());
     }
 
     public getTimerStringFormat(): string {
@@ -49,7 +49,7 @@ export class Timer {
         this.seconds = state.seconds;
         this.minutes = state.minutes;
         this.hours = state.hours;
-        this.timer$.next(this.getTimerStringFormat());
+        this.timer$?.next(this.getTimerStringFormat());
     }
 
     public prepareForEncode(): any {

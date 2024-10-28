@@ -49,4 +49,28 @@
             font-size: 2.5vw;
         }
     }
+    .continue-button {
+        display: block;
+        margin-top: 24px;
+        color: white;
+        font-size: 14px;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            height: 1px;
+            width: 100%;
+            background: white;
+            transition: width .3s;
+            bottom: -2px;
+        }
+
+        &:hover {
+            &::after {
+                width: 30%;
+            }
+        }
+    }
 }
